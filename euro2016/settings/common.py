@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'joc',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -74,7 +75,7 @@ WSGI_APPLICATION = 'euro2016.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ca-es'
 
 TIME_ZONE = 'CET'
 
