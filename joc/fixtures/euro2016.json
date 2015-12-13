@@ -1,0 +1,337 @@
+[
+  {
+    "model": "joc.Grup",
+    "pk": 1,
+    "fields": {
+      "nom": "A"
+    }
+  },
+  {
+    "model": "joc.Grup",
+    "pk": 2,
+    "fields": {
+      "nom": "B"
+    }
+  },
+  {
+    "model": "joc.Grup",
+    "pk": 3,
+    "fields": {
+      "nom": "C"
+    }
+  },
+  {
+    "model": "joc.Grup",
+    "pk": 4,
+    "fields": {
+      "nom": "D"
+    }
+  },
+  {
+    "model": "joc.Grup",
+    "pk": 5,
+    "fields": {
+      "nom": "E"
+    }
+  },
+  {
+    "model": "joc.Grup",
+    "pk": 6,
+    "fields": {
+      "nom": "F"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 1,
+    "fields": {
+        "nom": "França",
+        "bandera": "franca.png",
+        "grup": "1"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 2,
+    "fields": {
+        "nom": "Romania",
+        "bandera": "romania.png",
+        "grup": "1"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 3,
+    "fields": {
+        "nom": "Albània",
+        "bandera": "albania.png",
+        "grup": "1"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 4,
+    "fields": {
+        "nom": "Suïssa",
+        "bandera": "suissa.png",
+        "grup": "1"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 5,
+    "fields": {
+        "nom": "Anglaterra",
+        "bandera": "anglaterra.png",
+        "grup": "2"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 6,
+    "fields": {
+        "nom": "Rússia",
+        "bandera": "russia.png",
+        "grup": "2"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 7,
+    "fields": {
+        "nom": "Gaŀles",
+        "bandera": "gales.png",
+        "grup": "2"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 8,
+    "fields": {
+        "nom": "Eslovàquia",
+        "bandera": "eslovaquia.png",
+        "grup": "2"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 9,
+    "fields": {
+        "nom": "Alemanya",
+        "bandera": "alemanya.png",
+        "grup": "3"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 10,
+    "fields": {
+        "nom": "Ucraïna",
+        "bandera": "ucraina.png",
+        "grup": "3"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 11,
+    "fields": {
+        "nom": "Polònia",
+        "bandera": "polonia.png",
+        "grup": "3"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 12,
+    "fields": {
+        "nom": "Irlanda del Nord",
+        "bandera": "irlandadelnord.png",
+        "grup": "3"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 13,
+    "fields": {
+        "nom": "Espanya",
+        "bandera": "espanya.png",
+        "grup": "4"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 14,
+    "fields": {
+        "nom": "República Txeca",
+        "bandera": "republicatxeca.png",
+        "grup": "4"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 15,
+    "fields": {
+        "nom": "Turquia",
+        "bandera": "turquia.png",
+        "grup": "4"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 16,
+    "fields": {
+        "nom": "Croàcia",
+        "bandera": "croacia.png",
+        "grup": "4"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 17,
+    "fields": {
+        "nom": "Bèlgica",
+        "bandera": "belgica.png",
+        "grup": "5"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 18,
+    "fields": {
+        "nom": "Itàlia",
+        "bandera": "italia.png",
+        "grup": "5"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 19,
+    "fields": {
+        "nom": "Irlanda",
+        "bandera": "irlanda.png",
+        "grup": "5"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 20,
+    "fields": {
+        "nom": "Suècia",
+        "bandera": "suecia.png",
+        "grup": "5"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 21,
+    "fields": {
+        "nom": "Portugal",
+        "bandera": "portugal.png",
+        "grup": "6"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 22,
+    "fields": {
+        "nom": "Islàndia",
+        "bandera": "islandia.png",
+        "grup": "6"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 23,
+    "fields": {
+        "nom": "Àustria",
+        "bandera": "austria.png",
+        "grup": "6"
+    }
+  },
+  {
+    "model": "joc.Equip",
+    "pk": 24,
+    "fields": {
+        "nom": "Hongria",
+        "bandera": "hongria.png",
+        "grup": "6"
+    }
+  },
+  {
+    "model": "joc.Partit",
+    "pk": 1,
+    "fields": {
+      "equip1": 1,
+      "equip2": 2,
+      "diaihora": "2015-06-10T21:00:00+02:00",
+      "estadi": "Stade de France, Saint-Denis",
+      "grup": 1
+    }
+  },
+  {
+    "model": "joc.Partit",
+    "pk": 2,
+    "fields": {
+      "equip1": 3,
+      "equip2": 4,
+      "diaihora": "2015-06-11T15:00:00+02:00",
+      "estadi": "Stade Bollaert-Delelis, Lens Agglo",
+      "grup": 1
+    }
+  },
+  {
+    "model": "joc.Partit",
+    "pk": 3,
+    "fields": {
+      "equip1": 7,
+      "equip2": 8,
+      "diaihora": "2015-06-11T18:00:00+02:00",
+      "estadi": "Stade de Bordeaux, Bordeaux",
+      "grup": 2
+    }
+  },
+  {
+    "model": "joc.Partit",
+    "pk": 4,
+    "fields": {
+      "equip1": 5,
+      "equip2": 6,
+      "diaihora": "2015-06-11T21:00:00+02:00",
+      "estadi": "Stade Vélodrome, Marseille",
+      "grup": 2
+    }
+  },
+  {
+    "model": "joc.Partit",
+    "pk": 5,
+    "fields": {
+      "equip1": 15,
+      "equip2": 16,
+      "diaihora": "2015-06-12T15:00:00+02:00",
+      "estadi": "Parc des Princes, Paris",
+      "grup": 4
+    }
+  },
+  {
+    "model": "joc.Partit",
+    "pk": 6,
+    "fields": {
+      "equip1": 11,
+      "equip2": 12,
+      "diaihora": "2015-06-12T18:00:00+02:00",
+      "estadi": "Stade de Nice, Nice",
+      "grup": 3
+    }
+  },
+  {
+    "model": "joc.Partit",
+    "pk": 7,
+    "fields": {
+      "equip1": 9,
+      "equip2": 10,
+      "diaihora": "2015-06-12T21:00:00+02:00",
+      "estadi": "Stade Pierre Mauroy, Lille Métropole",
+      "grup": 3
+    }
+  }
+]

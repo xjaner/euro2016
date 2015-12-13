@@ -12,26 +12,46 @@ class Jugador(models.Model):
     punts_grups = models.PositiveSmallIntegerField()
     punts_equips_encertats = models.PositiveSmallIntegerField()
 
+class Grup(models.Model):
+    nom = models.CharField(max_length=32)
+
+    def __unicode__(self):
+        return self.nom
+
 class Equip(models.Model):
     nom = models.CharField(max_length=128)
     bandera = models.CharField(max_length=128)
-
-class Grup(models.Model):
-    equip1 = models.ForeignKey('Equip', related_name='equip1_grup')
-    equip2 = models.ForeignKey('Equip', related_name='equip2_grup')
-    equip3 = models.ForeignKey('Equip', related_name='equip3_grup')
-    equip4 = models.ForeignKey('Equip', related_name='equip4_grup')
-
-class Partit(models.Model):
-    equip1 = models.ForeignKey('Equip', related_name='equip1')
-    equip2 = models.ForeignKey('Equip', related_name='equip2')
-    diaihora = models.DateTimeField()
-    estadi = models.CharField(max_length=128)
     grup = models.ForeignKey('Grup')
 
-class Resultat(models.Model):
-    jugador = models.ForeignKey('Jugador')
-    partit = models.ForeignKey('Partit')
+    def __unicode__(self):
+        return self.nom
+
+class PronosticEquipGrup(models.Model):
+    jugador = models.ForeignKey(Jugador)
+    equip = models.ForeignKey(Equip)
+    posicio = models.PositiveSmallIntegerField()
+    punts = models.PositiveSmallIntegerField()
+    diferencia = models.PositiveSmallIntegerField()
+    favor = models.PositiveSmallIntegerField()
+
+class Partit(models.Model):
+    equip1 = models.ForeignKey(Equip, related_name='equip1')
+    equip2 = models.ForeignKey(Equip, related_name='equip2')
+    diaihora = models.DateTimeField()
+    estadi = models.CharField(max_length=128)
+    grup = models.ForeignKey(Grup)
+
+    def __unicode__(self):
+        return u'[{pk}- {grup}] {equip1} - {equip2}'.format(
+            pk=self.pk,
+            grup=self.grup,
+            equip1=self.equip1,
+            equip2=self.equip2,
+        )
+
+class PronosticPartit(models.Model):
+    jugador = models.ForeignKey(Jugador)
+    partit = models.ForeignKey(Partit)
     gols1 = models.PositiveSmallIntegerField()
     gols2 = models.PositiveSmallIntegerField()
 

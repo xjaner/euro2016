@@ -24,10 +24,7 @@ class Migration(migrations.Migration):
             name='Grup',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('equip1', models.ForeignKey(related_name='equip1_grup', to='joc.Equip')),
-                ('equip2', models.ForeignKey(related_name='equip2_grup', to='joc.Equip')),
-                ('equip3', models.ForeignKey(related_name='equip3_grup', to='joc.Equip')),
-                ('equip4', models.ForeignKey(related_name='equip4_grup', to='joc.Equip')),
+                ('nom', models.CharField(max_length=32)),
             ],
         ),
         migrations.CreateModel(
@@ -57,7 +54,19 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Resultat',
+            name='PronosticEquipGrup',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('posicio', models.PositiveSmallIntegerField()),
+                ('punts', models.PositiveSmallIntegerField()),
+                ('diferencia', models.PositiveSmallIntegerField()),
+                ('favor', models.PositiveSmallIntegerField()),
+                ('equip', models.ForeignKey(to='joc.Equip')),
+                ('jugador', models.ForeignKey(to='joc.Jugador')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='PronosticPartit',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('gols1', models.PositiveSmallIntegerField()),
@@ -65,5 +74,10 @@ class Migration(migrations.Migration):
                 ('jugador', models.ForeignKey(to='joc.Jugador')),
                 ('partit', models.ForeignKey(to='joc.Partit')),
             ],
+        ),
+        migrations.AddField(
+            model_name='equip',
+            name='grup',
+            field=models.ForeignKey(to='joc.Grup'),
         ),
     ]
