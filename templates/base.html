@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+    {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+    {% endblock stylesheets %}
+    <title>El Joc de l'Eurocopa 2016 - {% block title %}{% endblock title %}</title>
+    </head>
+
+    <body>
+    <div id="contenidor">
+    <div id="cap"><img src="{% static "img/cap.png" %}"></div>
+    <div id="contingut">
+    {% block content %}{% endblock content %}
+    </div>
+    <div id="cul">2006-2016 - Pàgina creada per Xavier Janer. Sou lliures per fer-ne el que vulgueu.</div>
+    </div>
+    </body>
+</html>

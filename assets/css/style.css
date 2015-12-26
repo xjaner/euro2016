@@ -1,0 +1,52 @@
+A,A:visited,A:active,A:focus,A:link,A:hover
+{
+border-style: none;
+}
+
+BODY{
+font : 12pt Times, Geneva, Helvetica, sans-serif; 
+}
+
+#contenidor{
+width: 1200px;
+margin-top: 10px;
+background-color: #ffffff;
+text-align: center;
+margin: auto;
+}
+
+#contingut{
+width: 1200px;
+margin-top: 20px;
+background-color: #ffffff;
+text-align: center;
+}
+
+#cap{
+height : 180px;
+width: 1200px;
+text-align: center;
+border-bottom: 2px solid black;
+}
+
+#cul{
+margin:auto;
+margin-top: 25px;
+padding-top: 5px;
+font-size: 12px;
+font-weight: bold;
+text-align: center;
+width: 1180px;
+margin-left: 10px;
+border-top: 2px solid black;
+clear:both;
+}
+
+.boto{
+margin-top: 8px;
+color: white;
+font-size: 12px;
+font-weight: bold;
+background-color: #0366a7;
+width: 100px;	
+}

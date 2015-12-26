@@ -16,6 +16,16 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+# From 2 scoops of Django
+from unipath import Path
+BASE_DIR = Path(__file__).ancestor(3)
+MEDIA_ROOT = BASE_DIR.child("media")
+STATIC_ROOT = BASE_DIR.child("static")
+STATICFILES_DIRS = (
+    BASE_DIR.child("assets"),
+)
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -56,7 +66,7 @@ ROOT_URLCONF = 'euro2016.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': (BASE_DIR.child("templates"),),
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
