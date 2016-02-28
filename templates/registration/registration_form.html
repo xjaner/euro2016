@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Pàgina de registre pel joc de l'Eurocopa 2016{% endblock %}
+
+{% block content %}
+
+Aquesta pàgina serveix per registrar-te. Un cop fet el registre, rebràs un email amb les instruccions per activar el teu compte.
+
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    {{ supplement_form.as_p }}
+    <p><input type="submit" value="Register"></p>
+</form>
+
+{% endblock %}
+

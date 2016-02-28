@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}),
     url(r'^logout/$', auth_views.login, {'template_name': 'logout.html'}),
+    url(r'^registration/', include('registration.urls')),
 ]

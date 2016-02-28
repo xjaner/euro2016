@@ -24,6 +24,9 @@ STATIC_ROOT = BASE_DIR.child("static")
 STATICFILES_DIRS = (
     BASE_DIR.child("assets"),
 )
+LOCALE_PATHS = (
+    BASE_DIR.child("languages"),
+)
 
 
 # Quick-start development settings - unsuitable for production
@@ -48,6 +51,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'joc',
+    'registration',
+    'registration.supplements.default',
+    'registration_supplement',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,6 +65,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'euro2016.urls'
@@ -100,3 +107,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REGISTRATION_SUPPLEMENT_CLASS = 'registration_supplement.models.RegistrationSupplement'
