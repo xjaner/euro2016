@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for euro2016 project.
 
@@ -50,6 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'joc',
     'registration',
     'registration.supplements.default',
@@ -58,7 +60,6 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -66,6 +67,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
 )
 
 ROOT_URLCONF = 'euro2016.urls'
@@ -92,7 +94,11 @@ WSGI_APPLICATION = 'euro2016.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'ca-es'
+LANGUAGE_CODE = 'ca'
+gettext = lambda s: s
+LANGUAGES = (
+    ('ca', gettext('Català')),
+)
 
 TIME_ZONE = 'CET'
 
@@ -109,3 +115,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 REGISTRATION_SUPPLEMENT_CLASS = 'registration_supplement.models.RegistrationSupplement'
+
+# sites framework - 'django.contrib.sites'
+SITE_ID = 1
+
+# django-inspectional-registration
+DEFAULT_FROM_EMAIL = 'xjaner@gmail.com'

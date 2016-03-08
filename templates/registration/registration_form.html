@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Pàgina de registre pel joc de l'Eurocopa 2016{% endblock %}
+{% block title %}{% trans "Registration page for the Eurocup 2016 game" %}{% endblock %}
 
 {% block content %}
 
-Aquesta pàgina serveix per registrar-te. Un cop fet el registre, rebràs un email amb les instruccions per activar el teu compte.
+{% trans "Once you are registered, you'll receive an email with the instructions" %}
 
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
