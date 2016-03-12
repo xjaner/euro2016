@@ -10,7 +10,7 @@ from registration.forms import RegistrationForm
 
 class RegistrationSupplement(RegistrationSupplementBase):
     first_name = models.CharField(max_length=100, verbose_name=_("First name"))
-    last_name = models.CharField(max_length=100, verbose_name=_("Cognoms"))
+    last_name = models.CharField(max_length=100, verbose_name=_("Last name"))
 
     def __unicode__(self):
         # a summary of this supplement

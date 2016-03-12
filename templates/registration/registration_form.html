@@ -10,7 +10,7 @@
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
     {{ supplement_form.as_p }}
-    <p><input type="submit" value="Register"></p>
+    <p><input type="submit" value="{% trans 'Register' %}"></p>
 </form>
 
 {% endblock %}

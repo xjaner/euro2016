@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-08 23:22+0100\n"
+"POT-Creation-Date: 2016-03-12 09:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,13 +22,34 @@ msgstr ""
 msgid "Català"
 msgstr "Català"
 
-#: registration_supplement/models.py:16
+#: registration_supplement/models.py:12
 msgid "First name"
 msgstr "Nom"
 
-#: registration_supplement/models.py:20
+#: registration_supplement/models.py:13
 msgid "Last name"
 msgstr "Cognoms"
+
+#: templates/registration/registration_complete.html:4
+#: templates/registration/registration_complete.html:6
+msgid "Registration was complete"
+msgstr "Registre correcte."
+
+#: templates/registration/registration_complete.html:10
+msgid "Your account registration was created successfully."
+msgstr ""
+"El registre del teu compte pel joc de l'Eurocopa 2016 s'ha creat "
+"correctament."
+
+#: templates/registration/registration_complete.html:11
+#: templates/registration/registration_email.txt:5
+msgid "Please wait until the inspector verify your registration."
+msgstr "Els administradors del joc han de validar el teu registre."
+
+#: templates/registration/registration_complete.html:12
+#: templates/registration/registration_email.txt:6
+msgid "You will receive an acceptance or rejection email within several days."
+msgstr "En aquest cas, rebràs un email per poder activar el teu compte."
 
 #: templates/registration/registration_email.txt:2
 #, python-format
@@ -40,14 +61,6 @@ msgid "Your account registration for Euro 2016 game was created successfully."
 msgstr ""
 "El registre del teu compte pel joc de l'Eurocopa 2016 s'ha creat "
 "correctament."
-
-#: templates/registration/registration_email.txt:5
-msgid "Please wait until the inspector verify your registration."
-msgstr "Els administradors del joc han de validar el teu registre."
-
-#: templates/registration/registration_email.txt:6
-msgid "You will receive an acceptance or rejection email within several days."
-msgstr "En aquest cas, rebràs un email per poder activar el teu compte."
 
 #: templates/registration/registration_email_subject.txt:2
 #, python-format
@@ -63,6 +76,10 @@ msgid "Once you are registered, you'll receive an email with the instructions"
 msgstr ""
 "Aquesta pàgina serveix per registrar-te. Un cop fet el registre, rebràs un "
 "email amb les instruccions per activar el teu compte."
+
+#: templates/registration/registration_form.html:13
+msgid "Register"
+msgstr "Registra't"
 
 msgid "Username"
 msgstr "Nom d'usuari"
