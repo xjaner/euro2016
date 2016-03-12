@@ -17,8 +17,6 @@ class RegistrationSupplement(RegistrationSupplementBase):
         return "%s %s" % (self.first_name, self.last_name)
 
     def save(self, *args, **kwargs):
-        import ipdb
-        ipdb.set_trace(context=10)
         self.registration_profile.user.first_name = self.first_name
         self.registration_profile.user.last_name = self.last_name
         self.registration_profile.user.save()
