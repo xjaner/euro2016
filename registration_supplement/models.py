@@ -8,24 +8,18 @@ from registration.supplements.base import RegistrationSupplementBase
 from registration.forms import RegistrationForm
 
 
-attrs_dict = {'class': 'required'}
-
-class RegistrationSupplementForm(forms.Form):
-    first_name = forms.CharField(
-        widget=forms.TextInput(attrs=dict(attrs_dict, maxlength=100)),
-        label=_("First name"),
-    )
-    last_name = forms.CharField(
-        widget=forms.TextInput(attrs=dict(attrs_dict, maxlength=100)),
-        label=_("Last name"),
-    )
-
 class RegistrationSupplement(RegistrationSupplementBase):
-    form_class = RegistrationSupplementForm
-
-    first_name = models.CharField(max_length=100, help_text="Please fill your first name")
-    last_name = models.CharField(max_length=100, help_text="Please fill your last name")
+    first_name = models.CharField(max_length=100, verbose_name=_("First name"))
+    last_name = models.CharField(max_length=100, verbose_name=_("Cognoms"))
 
     def __unicode__(self):
         # a summary of this supplement
         return "%s %s" % (self.first_name, self.last_name)
+
+    def save(self, *args, **kwargs):
+        import ipdb
+        ipdb.set_trace(context=10)
+        self.registration_profile.user.first_name = self.first_name
+        self.registration_profile.user.last_name = self.last_name
+        self.registration_profile.user.save()
+        super(RegistrationSupplement, self).save(*args, **kwargs)
