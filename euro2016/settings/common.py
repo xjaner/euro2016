@@ -121,3 +121,5 @@ SITE_ID = 1
 
 # django-inspectional-registration
 DEFAULT_FROM_EMAIL = 'xjaner@gmail.com'
+REGISTRATION_REGISTRATION_EMAIL = False
+REGISTRATION_ACTIVATION_EMAIL = False
