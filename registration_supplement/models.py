@@ -6,6 +6,8 @@ from django import forms
 
 from registration.supplements.base import RegistrationSupplementBase
 from registration.forms import RegistrationForm
+from registration.signals import user_activated
+from joc.models import Jugador
 
 
 class RegistrationSupplement(RegistrationSupplementBase):
@@ -21,3 +23,12 @@ class RegistrationSupplement(RegistrationSupplementBase):
         self.registration_profile.user.last_name = self.last_name
         self.registration_profile.user.save()
         super(RegistrationSupplement, self).save(*args, **kwargs)
+
+
+def user_activated_callback(user, password, is_generated, request, **kwargs):
+    Jugador.objects.create(
+        usuari=user,
+        posicio=user.id,
+        posicio_anterior=user.id)
+
+user_activated.connect(user_activated_callback)
