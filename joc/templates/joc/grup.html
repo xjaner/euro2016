@@ -1,0 +1,20 @@
+{% extends "joc/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+{% endblock stylesheets %}
+
+{% block title %}Entrada dels resultats dels grups{% endblock %}
+
+{% block content %}
+
+<form name="f1" method="post">
+    {{ form.gols1.errors }}
+    <label for="{{ form.gols1.id_for_label }}">{{ form.instance.partit.equip1.nom }}</label>
+    {{ form.gols1 }}
+</form>
+
+{% endblock %}
+
