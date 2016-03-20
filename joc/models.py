@@ -29,10 +29,10 @@ class Equip(models.Model):
 class PronosticEquipGrup(models.Model):
     jugador = models.ForeignKey(Jugador)
     equip = models.ForeignKey(Equip)
-    posicio = models.PositiveSmallIntegerField()
-    punts = models.PositiveSmallIntegerField()
-    diferencia = models.PositiveSmallIntegerField()
-    favor = models.PositiveSmallIntegerField()
+    posicio = models.PositiveSmallIntegerField(default=0)
+    punts = models.PositiveSmallIntegerField(default=0)
+    diferencia = models.SmallIntegerField(default=0)
+    favor = models.PositiveSmallIntegerField(default=0)
 
 class Partit(models.Model):
     equip1 = models.ForeignKey(Equip, related_name='equip1')

@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django import forms
 from django.shortcuts import render
 
-from joc.models import Jugador, Partit, PronosticPartit
+from joc.models import Jugador, Equip, Partit, PronosticPartit, PronosticEquipGrup
 
 GOLS_CHOICES = ((0,0),(1,1),(2,2),(3,3),(4,4), (5,5), (6,6), (7,7), (8,8))
 class PartitForm(forms.ModelForm):
@@ -16,6 +16,10 @@ class PartitForm(forms.ModelForm):
 
 
 GrupForm = forms.modelformset_factory(PronosticPartit, form=PartitForm, extra=0)
+# ClassificacioForm = forms.modelformset_factory(
+#     PronosticEquipGrup, fields=('equip', 'posicio', 'punts', 'diferencia', 'favor'),
+#     extra=0,
+# )
 
 
 @login_required
@@ -33,11 +37,22 @@ def pronostic(request):
     grup_form = GrupForm(queryset=PronosticPartit.objects.filter(
         jugador=jugador, partit__grup__nom=grup))
 
+    # Creem els PronosticEquipGrup que faltin
+    equips_classificacio = []
+    for equip in Equip.objects.filter(grup__nom=grup):
+        equip_classificacio, _ = PronosticEquipGrup.objects.get_or_create(jugador=jugador,
+                                                                          equip=equip)
+        equips_classificacio.append(equip_classificacio)
+
+    # classificacio_form = ClassificacioForm(queryset=PronosticEquipGrup.objects.filter(
+    #     jugador=jugador, equip__grup__nom=grup))
+
     return render(
         request,
         'joc/grup.html',
         {
             'formset': grup_form,
+            'equips_classificacio': equips_classificacio,
             'height_banderes': 19,
             'width_banderes': 28,
             'border_banderes': 1,

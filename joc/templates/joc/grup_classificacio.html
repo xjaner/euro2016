@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <div id="classificacio">
 <div class="taula_classi">
 <table width="450">
@@ -10,48 +11,16 @@
 <td class="negreta">Gols</td>
 </tr>
 
+{% for equip_classificacio in equips_classificacio%}
 <tr>
-<td class="class_bandera"><img name="ban1" src="banderes/{$banderesC.0}" height="{$height_banderes}" width="{$width_banderes}" border="{$border_banderes}"></td>
-<td class="classif"><input type="text" size="20" name="c1" onFocus="this.blur()" value="{$nomsC.0}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="p1" onFocus="this.blur()" value="{$punts.0}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="d1" onFocus="this.blur()" value="{$diferencia.0}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="g1" onFocus="this.blur()" value="{$favor.0}"></td>
+<td class="class_bandera"><img src="{% with 'banderes/'|add:equip_classificacio.equip.bandera as bandera %}{% static bandera %}{% endwith %}" height="{{ height_banderes }}" width="{{ width_banderes }}" border="{{ border_banderes }}"></td>
+<td class="classif"><input type="text" size="20" name="c1" onFocus="this.blur()" value="{{ equip_classificacio.equip.nom }}"></td>
+<td align="center" class="classif"><input type="text" size="2" name="p1" onFocus="this.blur()" value="{{ equip_classificacio.punts }}"></td>
+<td align="center" class="classif"><input type="text" size="2" name="d1" onFocus="this.blur()" value="{{ equip_classificacio.diferencia }}"></td>
+<td align="center" class="classif"><input type="text" size="2" name="g1" onFocus="this.blur()" value="{{ equip_classificacio.favor }}"></td>
 </tr>
-<tr>
-<td class="class_bandera"><img name="ban2" src="banderes/{$banderesC.1}" height="{$height_banderes}" width="{$width_banderes}" border="{$border_banderes}"></td>
-<td class="classif"><input type="text" size="20" name="c2" onFocus="this.blur()" value="{$nomsC.1}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="p2" onFocus="this.blur()" value="{$punts.1}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="d2" onFocus="this.blur()" value="{$diferencia.1}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="g2" onFocus="this.blur()" value="{$favor.1}"></td>
-</tr>
-<tr>
-<td class="class_bandera"><img name="ban3" src="banderes/{$banderesC.2}" height="{$height_banderes}" width="{$width_banderes}" border="{$border_banderes}"></td>
-<td class="classif"><input type="text" size="20" name="c3" onFocus="this.blur()" value="{$nomsC.2}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="p3" onFocus="this.blur()" value="{$punts.2}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="d3" onFocus="this.blur()" value="{$diferencia.2}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="g3" onFocus="this.blur()" value="{$favor.2}"></td>
-</tr>
-<tr>
-<td class="class_bandera"><img name="ban4" src="banderes/{$banderesC.3}" height="{$height_banderes}" width="{$width_banderes}" border="{$border_banderes}"></td>
-<td class="classif"><input type="text" size="20" name="c4" onFocus="this.blur()" value="{$nomsC.3}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="p4" onFocus="this.blur()" value="{$punts.3}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="d4" onFocus="this.blur()" value="{$diferencia.3}"></td>
-<td align="center" class="classif"><input type="text" size="2" name="g4" onFocus="this.blur()" value="{$favor.3}"></td>
-</tr>
+{% endfor %}
 </table>
-<input type="hidden" name="cl1">
-<input type="hidden" name="cl2">
-<input type="hidden" name="cl3">
-<input type="hidden" name="cl4">
-
-<input type="hidden" name="error" value="0">
-
-<input type="hidden" name="cp1" value="{$partits[0].codi_partit}">
-<input type="hidden" name="cp2" value="{$partits[1].codi_partit}">
-<input type="hidden" name="cp3" value="{$partits[2].codi_partit}">
-<input type="hidden" name="cp4" value="{$partits[3].codi_partit}">
-<input type="hidden" name="cp5" value="{$partits[4].codi_partit}">
-<input type="hidden" name="cp6" value="{$partits[5].codi_partit}">
 </div>
 <div class="boto_next">
 <input type="button" class="boto_index" value="Següent grup" onclick="valida()">
