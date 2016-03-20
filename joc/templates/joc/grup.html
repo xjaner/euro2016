@@ -13,15 +13,24 @@
 
 <form name="f1" action="{% url 'joc:pronostic' %}" method="post">
 {% csrf_token %}
-{% for form in formset %}
 <div id="resultats">
+{% for form in formset %}
+{% if forloop.counter0|divisibleby:2 %}
 <div class="partits_linia">
 <div class="partit1">
-{% include "joc/partit.html" with form=form %}
+{% else %}
+<div class="partit2">
+{% endif %}
+{% include "joc/partit.html" %}
 </div>
+{% if not forloop.counter0|divisibleby:2 %}
 </div>
-</div>
+{% endif %}
 {% endfor %}
+</div>
+
+{% include "joc/grup_classificacio.html" %}
+
 </form>
 
 {% endblock %}

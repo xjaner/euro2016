@@ -1,12 +1,12 @@
 #resultats{
 	margin-top: 40px;
-	width: 760px;
+	width: 900px;
 	margin:auto;
 	clear:both;
 }
 #classificacio{
 	margin-top: 40px;
-	width: 760px;
+	width: 900px;
 	margin:auto;
 	clear:both;
 	padding-top: 25px;
@@ -14,18 +14,18 @@
 
 #partits_linia
 {
-	width:760px;
+	width:900px;
 }
 
 .partit1{
 	padding-top: 25px;
 	float:left;
-	width:380px;
+	width:420px;
 }
 .partit2{
 	padding-top: 25px;
 	float:right;
-	width:380px;
+	width:420px;
 }
 .titol_partit{
 	color: #992222;
@@ -64,13 +64,14 @@
 	padding-bottom: 15px;
 	float:left;
 	width:450px;
-	height:100px;
+	height:165px;
 }
 .boto_next{
-	padding-top: 75px;
 	float:right;
 	width:175px;
-	height:100px;
+	height:80px;
+    padding-top: 95px;
+    padding-right: 75px;
 }
 .classif input{
 	border:0;
