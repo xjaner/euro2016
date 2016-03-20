@@ -1,0 +1,70 @@
+<style type="text/css">
+a{
+text-decoration: none;
+}
+a:hover{
+text-decoration: underline;
+} 
+BODY{
+text-align: center;
+}
+
+H1{
+font-family: arial;
+font-size: 28px;
+font-weight: bold;
+color: black;
+text-transform: uppercase;
+text-decoration: underline;
+}
+
+#contenidor{
+height: 768px;
+width: 800px;
+margin-top: 20px;
+background-image: url(img/bgResize.jpg); 
+text-align: center;
+border-style: solid;
+border-width: 3px;
+border-color: black;
+margin: auto;
+}
+
+#formularis{
+height: 75px;
+width: 800px;
+margin-top: 690px;
+color: black;
+font-weight: bold;
+text-align: center;
+font-size: 14px;
+}
+
+#formularis input{
+font-size: 11px;
+background-color:#cdcdcd;
+}
+
+#div_nou_usuari{
+text-align:left;
+margin-left: 160px;
+margin-top: 8px;
+}
+
+.boto_index{
+font-size: 12px;
+font-weight: bold;
+color: black;
+width: 60px;	
+}
+
+.nou_usuari{
+color: black;
+font-weight: normal;
+font-size: 14px;
+text-decoration: none;
+}
+
+.nou_usuari:hover{
+text-decoration: underline;
+}

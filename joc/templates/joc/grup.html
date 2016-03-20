@@ -4,16 +4,24 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/estil_grup.css" %}">
 {% endblock stylesheets %}
 
 {% block title %}Entrada dels resultats dels grups{% endblock %}
 
 {% block content %}
 
-<form name="f1" method="post">
-    {{ form.gols1.errors }}
-    <label for="{{ form.gols1.id_for_label }}">{{ form.instance.partit.equip1.nom }}</label>
-    {{ form.gols1 }}
+<form name="f1" action="{% url 'joc:pronostic' %}" method="post">
+{% csrf_token %}
+{% for form in formset %}
+<div id="resultats">
+<div class="partits_linia">
+<div class="partit1">
+{% include "joc/partit.html" with form=form %}
+</div>
+</div>
+</div>
+{% endfor %}
 </form>
 
 {% endblock %}

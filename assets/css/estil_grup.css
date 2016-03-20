@@ -1,0 +1,92 @@
+#resultats{
+	margin-top: 40px;
+	width: 760px;
+	margin:auto;
+	clear:both;
+}
+#classificacio{
+	margin-top: 40px;
+	width: 760px;
+	margin:auto;
+	clear:both;
+	padding-top: 25px;
+}
+
+#partits_linia
+{
+	width:760px;
+}
+
+.partit1{
+	padding-top: 25px;
+	float:left;
+	width:380px;
+}
+.partit2{
+	padding-top: 25px;
+	float:right;
+	width:380px;
+}
+.titol_partit{
+	color: #992222;
+	font-family: Verdana;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.dia{
+	padding-left: 5px;
+	background-color: black;
+	color: white;
+	font-family: Verdana;
+	font-size: 10px;
+}
+.equip{
+	font-family: Verdana;
+	font-size: 12px;
+}
+.negreta{
+	font-family: Verdana;
+	font-size: 10px;
+}
+.negreta_bandera{
+	font-family: Verdana;
+	font-size: 10px;
+	text-align:center;
+}
+.class_bandera
+{
+	text-align: center;
+}
+.taula_classi{
+	padding-left:50px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	float:left;
+	width:450px;
+	height:100px;
+}
+.boto_next{
+	padding-top: 75px;
+	float:right;
+	width:175px;
+	height:100px;
+}
+.classif input{
+	border:0;
+}
+.boto_index{
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #f4f192;
+	width: 150px;    
+}
+#boto_quarts{
+	padding-top:25px;
+	padding-bottom:25px;
+	width:400px;
+	text-align:center;
+	clear:both;
+	float:right;
+}
+

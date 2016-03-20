@@ -1,0 +1,96 @@
+A,A:visited,A:active,A:focus,A:link,A:hover
+{
+border-style: none;
+}
+
+BODY{
+font : 8pt Times, Geneva, Helvetica, sans-serif; 
+}
+
+#contenidor{
+width: 800px;
+margin-top: 10px;
+background-color: #ffffff;
+text-align: center;
+margin: auto;
+}
+
+#cap{
+height : 200px;
+width: 1200px;
+text-align: center;
+border-bottom: 2px solid black;
+}
+
+#barra1{
+margin-top: 2px;
+padding-top: 3px;
+padding-left: 3px;
+padding-right: 3px;
+width: 394px;
+background-color: #f7f9c7;
+font-size: 12px;
+font-weight: bold;
+float: left;
+text-align: left;
+}
+
+#barra1 a{
+color: black;
+font-size: 12px;
+font-weight: bold;
+text-align: left;
+text-decoration: none;
+}
+
+#barra1 a:hover{
+text-decoration: underline;
+}
+
+#barra2{
+margin-top: 2px;
+margin-left: 2px;
+padding-top: 3px;
+padding-right: 3px;
+padding-right: 3px;
+width: 395px;
+background-color: #f4f192;
+font-size: 12px;
+font-weight: bold;
+float: right;
+text-align:right;
+}
+
+#cul{
+margin:auto;
+margin-top: 25px;
+padding-top: 5px;
+font-size: 12px;
+font-weight: bold;
+text-align: center;
+width: 780px;
+margin-left: 10px;
+border-top: 2px solid black;
+clear:both;
+}
+
+.boto{
+margin-top: 8px;
+font-size: 12px;
+font-weight: bold;
+background-color: #d8b538;
+width: 100px;	
+}
+
+#dreta
+{
+text-align: right;
+float:right;
+}
+
+#esq
+{
+float:left;
+text-align: left;
+}
+

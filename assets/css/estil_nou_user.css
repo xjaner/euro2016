@@ -1,0 +1,51 @@
+#pestanya{
+margin-top: 40px;
+margin-left: 80px;
+padding-top: 15px;
+width: 212px;
+height: 38px;
+float: left;
+background-color: #f4f192;
+border-top-left-radius: 15px;
+border-top-right-radius: 15px;
+font-family: Helvetica;
+font-size: 22px;
+font-weight: bold;
+}
+
+#taula{
+font-family: Verdana;
+margin-left: 80px;
+padding-top: 20px;
+padding-left: 30px;
+padding-bottom: 30px;
+width: 600px;
+background-color: #f4f192;
+clear: both;
+border-bottom: solid 1px black;
+}
+
+#taula form{
+font-size: 6px;
+}
+
+.tick{
+text-align: right;
+padding-top: 6px;
+padding-right: 80px;
+}
+
+.dades{
+font-size: 12px;
+text-align: left;
+padding-top: 30px;
+padding-left: 0px;
+}
+
+.inputs{
+font-size: 12px;
+}
+
+.camps{
+font-size: 12px;
+}
