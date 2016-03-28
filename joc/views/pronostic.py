@@ -7,9 +7,9 @@ from joc.models import Jugador, Equip, Partit, PronosticPartit, PronosticEquipGr
 GOLS_CHOICES = ((0,0),(1,1),(2,2),(3,3),(4,4), (5,5), (6,6), (7,7), (8,8))
 class PartitForm(forms.ModelForm):
     gols1 = forms.ChoiceField(choices=GOLS_CHOICES,
-                              widget=forms.Select(attrs={"onChange":'refresh()'}))
+                              widget=forms.Select(attrs={"onChange":'actualitza()'}))
     gols2 = forms.ChoiceField(choices=GOLS_CHOICES,
-                              widget=forms.Select(attrs={"onChange":'refresh()'}))
+                              widget=forms.Select(attrs={"onChange":'actualitza()'}))
     class Meta:
         model = PronosticPartit
         fields = ('gols1', 'gols2')
