@@ -19,6 +19,10 @@
 {% csrf_token %}
 <div id="resultats">
 {% for form in formset %}
+{% if forloop.counter0 < 2 %}
+<input type="hidden" name="nom-equip-{{ form.instance.partit.equip1.id }}" value="{{ form.instance.partit.equip1.nom }}">
+<input type="hidden" name="nom-equip-{{ form.instance.partit.equip2.id }}" value="{{ form.instance.partit.equip2.nom }}">
+{% endif %}
 {% if forloop.counter0|divisibleby:2 %}
 <div class="partits_linia">
 <div class="partit1">
@@ -34,6 +38,7 @@
 </div>
 
 {% include "joc/grup_classificacio.html" %}
+
 
 </form>
 
