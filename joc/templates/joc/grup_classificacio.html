@@ -13,7 +13,7 @@
 
 {% for equip_classificacio in equips_classificacio%}
 <tr>
-<td class="class_bandera"><img src="{% with 'banderes/'|add:equip_classificacio.equip.bandera as bandera %}{% static bandera %}{% endwith %}" height="{{ height_banderes }}" width="{{ width_banderes }}" border="{{ border_banderes }}"></td>
+<td class="class_bandera"><img name="ban{{ forloop.counter0 }}" src="{% with 'banderes/'|add:equip_classificacio.equip.bandera as bandera %}{% static bandera %}{% endwith %}" height="{{ height_banderes }}" width="{{ width_banderes }}" border="{{ border_banderes }}"></td>
 <td class="classif"><input type="text" size="20" name="c{{ forloop.counter0 }}" onFocus="this.blur()" value="{{ equip_classificacio.equip.nom }}"></td>
 <td align="center" class="classif"><input type="text" size="2" name="p{{ forloop.counter0 }}" onFocus="this.blur()" value="{{ equip_classificacio.punts }}"></td>
 <td align="center" class="classif"><input type="text" size="2" name="d{{ forloop.counter0 }}" onFocus="this.blur()" value="{{ equip_classificacio.diferencia }}"></td>

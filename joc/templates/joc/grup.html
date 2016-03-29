@@ -22,6 +22,8 @@
 {% if forloop.counter0 < 2 %}
 <input type="hidden" name="nom-equip-{{ form.instance.partit.equip1.id }}" value="{{ form.instance.partit.equip1.nom }}">
 <input type="hidden" name="nom-equip-{{ form.instance.partit.equip2.id }}" value="{{ form.instance.partit.equip2.nom }}">
+<input type="hidden" name="bandera-equip-{{ form.instance.partit.equip1.id }}" value="{% with 'banderes/'|add:form.instance.partit.equip1.bandera as bandera1 %}{% static bandera1 %}{% endwith %}">
+<input type="hidden" name="bandera-equip-{{ form.instance.partit.equip2.id }}" value="{% with 'banderes/'|add:form.instance.partit.equip2.bandera as bandera2 %}{% static bandera2 %}{% endwith %}">
 {% endif %}
 {% if forloop.counter0|divisibleby:2 %}
 <div class="partits_linia">

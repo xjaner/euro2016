@@ -34,27 +34,27 @@ function classifica(ids_equips, resultats)
 
     for (i = 0; i<ids_equips.length; i++)
     {
-        for (j = 1; j<ids_equips.length; j++)
+        for (j = i + 1; j<ids_equips.length; j++)
         {
-	    id_equip1 = ids_equips[i];
-	    id_equip2 = ids_equips[j];
+            id_equip1 = ids_equips[i];
+            id_equip2 = ids_equips[j];
 
-	    gols_equip1 = resultats[id_equip1][id_equip2];
-	    gols_equip2 = resultats[id_equip2][id_equip1];
-	    
+            gols_equip1 = resultats[id_equip1][id_equip2];
+            gols_equip2 = resultats[id_equip2][id_equip1];
+       
             // Actualitza punts
             if (gols_equip1 > gols_equip2)
             {
-            	_.findWhere(equips, {'id':id_equip1}).punts += 3;
+               _.findWhere(equips, {'id':id_equip1}).punts += 3;
             }
             else if (gols_equip2 > gols_equip1)
             {
-            	_.findWhere(equips, {'id':id_equip2}).punts += 3;
+               _.findWhere(equips, {'id':id_equip2}).punts += 3;
             }
             else
             {
-            	_.findWhere(equips, {'id':id_equip1}).punts += 1;
-            	_.findWhere(equips, {'id':id_equip2}).punts += 1;
+               _.findWhere(equips, {'id':id_equip1}).punts += 1;
+               _.findWhere(equips, {'id':id_equip2}).punts += 1;
             }
             
             // Actualitza diferencia i gols
@@ -69,7 +69,7 @@ function classifica(ids_equips, resultats)
         }
     }
 
-    return _(equips).chain().sortBy('gols').sortBy('diferencia').sortBy('punts').reverse();
+    return _(equips).chain().sortBy('gols').sortBy('diferencia').sortBy('punts').reverse().value();
 }
 
 function actualitza()
@@ -83,17 +83,39 @@ function actualitza()
     ]
 
     var noms_equips = Array(25);
+    var banderes_equips = Array(25);
     for (i = 0; i<ids_equips.length; i++)
     {
-    	noms_equips[ids_equips[i]] = formulari.elements["nom-equip-"+ids_equips[i]]
+       noms_equips[ids_equips[i]] = formulari.elements["nom-equip-"+ids_equips[i]].value
+       banderes_equips[ids_equips[i]] = formulari.elements["bandera-equip-"+ids_equips[i]].value
     }
 
     resultats = genera_resultats(formulari);
 
-    classificats = classifica(ids_equips, resultats);
+    var classificats = classifica(ids_equips, resultats);
 
-    formulari.elements["c0"].value = classificats[0].id
-    formulari.elements["c1"].value = classificats[1].id
-    formulari.elements["c2"].value = classificats[2].id
-    formulari.elements["c3"].value = classificats[3].id
+    document.ban0.src = banderes_equips[classificats[0].id]
+    document.ban1.src = banderes_equips[classificats[1].id]
+    document.ban2.src = banderes_equips[classificats[2].id]
+    document.ban3.src = banderes_equips[classificats[3].id]
+
+    formulari.elements["c0"].value = noms_equips[classificats[0].id]
+    formulari.elements["c1"].value = noms_equips[classificats[1].id]
+    formulari.elements["c2"].value = noms_equips[classificats[2].id]
+    formulari.elements["c3"].value = noms_equips[classificats[3].id]
+
+    formulari.elements["p0"].value = classificats[0].punts
+    formulari.elements["p1"].value = classificats[1].punts
+    formulari.elements["p2"].value = classificats[2].punts
+    formulari.elements["p3"].value = classificats[3].punts
+
+    formulari.elements["d0"].value = classificats[0].diferencia
+    formulari.elements["d1"].value = classificats[1].diferencia
+    formulari.elements["d2"].value = classificats[2].diferencia
+    formulari.elements["d3"].value = classificats[3].diferencia
+
+    formulari.elements["g0"].value = classificats[0].gols
+    formulari.elements["g1"].value = classificats[1].gols
+    formulari.elements["g2"].value = classificats[2].gols
+    formulari.elements["g3"].value = classificats[3].gols
 }
