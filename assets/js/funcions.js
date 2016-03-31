@@ -100,9 +100,9 @@ function classifica(ids_equips, resultats, passada)
     {
         var new_classificats = Array();
         var i = 0;
-        while(i < (classificats.length - 1))
+        while(i < classificats.length)
 	{
-	    if (!agrupa(classificats[i], classificats[i + 1]))
+	    if (i == (classificats.length - 1) || !agrupa(classificats[i], classificats[i + 1]))
 	    {
 	        new_classificats.push(classificats[i]);
 	    }
