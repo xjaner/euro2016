@@ -72,12 +72,22 @@ function ordena(ids_equips, resultats)
     return _(equips).chain().sortBy('gols').sortBy('diferencia').sortBy('punts').reverse().value();
 }
 
-function classifica(ids_equips, resultats)
+function classifica(ids_equips, resultats, passada)
 {
     var error = 0;
     var classificats = ordena(ids_equips, resultats);
 
-    var agrupats = _.groupBy(classificats, function(obj){ return obj.punts+"-"+obj.diferencia+"-"+obj.gols; });
+    if (passada == 1)
+    {
+        var agrupa = function(objA, objB) { return objA.punts == objB.punts; };
+        var agrupats = _.groupBy(classificats, 'punts');
+    }
+    else
+    {
+        var agrupa = function(objA, objB) { return objA.diferencia == objB.diferencia && objA.gols == objB.gols; };
+        var agrupats = _.groupBy(classificats, function(obj){ return obj.diferencia+"-"+obj.gols; });
+    }
+
     if (Object.keys(agrupats).length == ids_equips.length)
     {
         return [classificats, error];
@@ -89,30 +99,50 @@ function classifica(ids_equips, resultats)
     else
     {
         var new_classificats = Array();
-        for (var i = 0; i < Object.keys(agrupats).length; i++)
+        var i = 0;
+        while(i < (classificats.length - 1))
 	{
-	    if (agrupats[Object.keys(agrupats)[i]].length == 1)
+	    if (!agrupa(classificats[i], classificats[i + 1]))
 	    {
-	        new_classificats.push(agrupats[Object.keys(agrupats)[i]][0]);
+	        new_classificats.push(classificats[i]);
 	    }
 	    else
 	    {
 		var sub_ids = Array();
-		for (var j = 0; j < agrupats[Object.keys(agrupats)[i]].length; j++)
-		{
-		    sub_ids.push(agrupats[Object.keys(agrupats)[i]][j].id);
+                sub_ids.push(classificats[i].id);
+		i++;
+
+		while(i < (classificats.length - 1) && agrupa(classificats[i], classificats[i + 1]))
+	        {
+                    sub_ids.push(classificats[i].id);
+		    i++;
 		}
-	        var resultat_sub_classifica = classifica(sub_ids, resultats);
+                sub_ids.push(classificats[i].id);
+
+	        var resultat_sub_classifica = classifica(sub_ids, resultats, 1);
 		var sub_classifica = resultat_sub_classifica[0];
 		error = resultat_sub_classifica[1];
+
+		if (error == 1)
+		{
+	            var resultat_sub_classifica2 = classifica(sub_ids, resultats, 2);
+		    var sub_classifica = resultat_sub_classifica2[0];
+		    error2 = resultat_sub_classifica2[1];
+
+		    if (error2 == 0)
+		    {
+                        error = 0;
+		    }
+		}
 
 		for (var j = 0; j < sub_classifica.length; j++)
 		{
 		    new_classificats.push(_.findWhere(classificats, {'id':sub_classifica[j].id}));
 		}
 	    }
+	    i++;
 	}
-	classificats = new_classificats;
+        classificats = new_classificats;
     }
         
     return [classificats, error];
@@ -138,7 +168,7 @@ function actualitza()
 
     resultats = genera_resultats(formulari);
 
-    var resultat_classificats = classifica(ids_equips, resultats);
+    var resultat_classificats = classifica(ids_equips, resultats, 1);
     var classificats = resultat_classificats[0];
     var error = resultat_classificats[1];
 
