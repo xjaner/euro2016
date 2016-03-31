@@ -1,3 +1,5 @@
+var NUM_TEAMS_PER_GROUP = 4;
+
 function create2DArray(rows) {
   var arr = [];
 
@@ -92,14 +94,19 @@ function classifica(ids_equips, resultats, passada)
     {
         return [classificats, error];
     }
-    else if (Object.keys(agrupats).length == 1)
+    else if (Object.keys(agrupats).length == 1 && (passada == 2 || classificats.length < NUM_TEAMS_PER_GROUP))
     {
         error = 1;
     }
     else
     {
+	var nova_passada = 1;
         var new_classificats = Array();
         var i = 0;
+	if (Object.keys(agrupats).length == 1)
+	{
+	    nova_passada = 2;
+	}
         while(i < classificats.length)
 	{
 	    if (i == (classificats.length - 1) || !agrupa(classificats[i], classificats[i + 1]))
@@ -119,11 +126,11 @@ function classifica(ids_equips, resultats, passada)
 		}
                 sub_ids.push(classificats[i].id);
 
-	        var resultat_sub_classifica = classifica(sub_ids, resultats, 1);
+	        var resultat_sub_classifica = classifica(sub_ids, resultats, nova_passada);
 		var sub_classifica = resultat_sub_classifica[0];
 		error = resultat_sub_classifica[1];
 
-		if (error == 1)
+		if (error == 1 && nova_passada == 1)
 		{
 	            var resultat_sub_classifica2 = classifica(sub_ids, resultats, 2);
 		    var sub_classifica = resultat_sub_classifica2[0];
