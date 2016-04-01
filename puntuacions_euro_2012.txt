@@ -1,0 +1,79 @@
+Fase de grups
+
+P. resultats
+Resultat: 4p
+Signe: 3p
+
+Són excloents: o signe o resultat o res (o 3 punts, o 4 o 0, mai 7)
+
+Classificació grups
+
+P. grups
+1 equip: 2p
+2 equips: 4p
+4 equips: 10p
+
+Encertar 3 equips no està puntuat perquè és impossible
+
+Quarts de final
+
+P. equips
+1 equip   1p
+2 equips  2p
+3 equips  3p
+4 equips  4p
+5 equips  8p
+6 equips  15p
+7 equips  25p
+8 equips  50p
+
+P. resultats
+signe:      5p
+resultat:   7p
+
+Semis
+
+P. equips
+1 equip    5p
+2 equips  10p
+3 equips  25p
+4 equips  50p
+
+P. grups
+Equip en posició correcta:   6p
+
+En cas d’encertar emparellament:
+
+P. resultats
+signe:      8p
+resultat:  12p
+
+Final final final!
+
+P. equips
+1 equip     20p
+2 equips   50p
+
+P. grups
+Equip en posició correcta:  10p
+
+En cas d’encertar l’emparellament:
+P. resultats
+signe:       13p
+resultat:    20p
+
+Quadre Final
+
+P. grups
+Campió           50p
+Sots campió    25p
+
+Aclariments
+
+Els punts de resultat exclouen els de signe, i no conta encertar el resultat si no s’ha encertat l’emparellament (és bastant evident, prò val la pena no deixar lloc als dubtes!)
+Encertar l’emparellament de quarts no puntua, perquè depèn de les classificacions, i aquestes ja estan puntuades.
+Els resultats dels partits de la segona fase només puntuen si estan al lloc del quadre correcte.
+El número d’equips puntuen exponencialment per premiar qui encerti més sorpreses.
+Els signes dels emparellaments de la Fase Final (1 X o 2), puntuaran al final dels 90 minuts. Si el signe canvia a la pròrroga, no es puntuarà.
+Encertar tots els equips que juguen una ronda està valorat de la mateixa manera.
+Puntua igual encertar els 8 equips de quarts com els 4 semifinalistes.

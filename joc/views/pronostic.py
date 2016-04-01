@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from joc.models import Jugador, Equip, Partit, PronosticPartit, PronosticEquipGrup
 
-GOLS_CHOICES = ((0,0),(1,1),(2,2),(3,3),(4,4), (5,5), (6,6), (7,7), (8,8))
+GOLS_CHOICES = (('-1', '-'), (0,0),(1,1),(2,2),(3,3),(4,4), (5,5), (6,6), (7,7), (8,8))
 class PartitForm(forms.ModelForm):
     gols1 = forms.ChoiceField(choices=GOLS_CHOICES,
                               widget=forms.Select(attrs={"onChange":'actualitza()'}))

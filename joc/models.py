@@ -52,8 +52,8 @@ class Partit(models.Model):
 class PronosticPartit(models.Model):
     jugador = models.ForeignKey(Jugador)
     partit = models.ForeignKey(Partit)
-    gols1 = models.PositiveSmallIntegerField(default=0)
-    gols2 = models.PositiveSmallIntegerField(default=0)
+    gols1 = models.SmallIntegerField(default=-1)
+    gols2 = models.SmallIntegerField(default=-1)
 
     def empat(self):
         return self.gols1 == self.gols2
