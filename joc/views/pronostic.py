@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django import forms
 from django.shortcuts import render
 
-from joc.models import Jugador, Equip, Partit, PronosticPartit, PronosticEquipGrup
+from joc.models import Grup, Jugador, Equip, Partit, PronosticPartit, PronosticEquipGrup
 
 GOLS_CHOICES = (('-1', '-'), (0,0),(1,1),(2,2),(3,3),(4,4), (5,5), (6,6), (7,7), (8,8))
 class PartitForm(forms.ModelForm):
@@ -24,11 +24,19 @@ GrupForm = forms.modelformset_factory(PronosticPartit, form=PartitForm, extra=0)
 
 @login_required
 def pronostic(request):
+    import ipdb
+    ipdb.set_trace()
+
     form = None
-    grup = request.GET.get('grup', 'A')
+    nom_grup = request.GET.get('grup', 'A')
+    grup = Grup.objects.get(nom=nom_grup)
+    try:
+        seguent_grup = Grup.objects.get(id=grup.id + 1).nom
+    except Grup.DoesNotExist:
+        seguent_grup = 'G'
 
     jugador = Jugador.objects.get(usuari=request.user)
-    partits = Partit.objects.filter(grup__nom='A')
+    partits = Partit.objects.filter(grup=grup)
 
     # Creem els PronosticPartit que faltin
     for partit in partits:
@@ -56,5 +64,6 @@ def pronostic(request):
             'height_banderes': 19,
             'width_banderes': 28,
             'border_banderes': 1,
+            'seguent_grup': seguent_grup,
         }
     )
