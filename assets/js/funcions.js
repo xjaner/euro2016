@@ -74,85 +74,123 @@ function ordena(ids_equips, resultats)
     return _(equips).chain().sortBy('gols').sortBy('diferencia').sortBy('punts').reverse().value();
 }
 
-function classifica(ids_equips, resultats, passada)
+function classifica(resultats, equips, tipus, equips_totals)
 {
     var error = 0;
-    var classificats = ordena(ids_equips, resultats);
+    // var classificats = ordena(ids_equips, resultats);
 
-    if (passada == 1)
+    if (tipus == 'punts')
     {
-        var agrupa = function(objA, objB) { return objA.punts == objB.punts; };
-        var agrupats = _.groupBy(classificats, 'punts');
+	var agrupa = function(objA, objB) { return objA.punts == objB.punts; };
+	var agrupats = _.groupBy(equips, 'punts');
     }
     else
     {
-        var agrupa = function(objA, objB) { return objA.diferencia == objB.diferencia && objA.gols == objB.gols; };
-        var agrupats = _.groupBy(classificats, function(obj){ return obj.diferencia+"-"+obj.gols; });
+	var agrupa = function(objA, objB) { return objA.diferencia == objB.diferencia && objA.gols == objB.gols; };
+	var agrupats = _.groupBy(equips, function(obj){ return obj.diferencia+"-"+obj.gols; });
     }
 
-    if (Object.keys(agrupats).length == ids_equips.length)
+    if (Object.keys(agrupats).length == equips.length)
     {
-        return [classificats, error];
+        return [equips, error];
     }
-    else if (Object.keys(agrupats).length == 1 && (passada == 2 || classificats.length < NUM_TEAMS_PER_GROUP))
+    else if (Object.keys(agrupats).length == 1)
     {
-        error = 1;
-    }
-    else
-    {
-	var nova_passada = 1;
-        var new_classificats = Array();
-        var i = 0;
-	if (Object.keys(agrupats).length == 1)
+        if (equips.length < NUM_TEAMS_PER_GROUP)
+        {
+            error = 1;
+        }
+	else
 	{
-	    nova_passada = 2;
-	}
-        while(i < classificats.length)
-	{
-	    if (i == (classificats.length - 1) || !agrupa(classificats[i], classificats[i + 1]))
+	    var new_classificats = Array();
+            var resultat_sub_classifica = classifica(resultats, equips, 'altres', equips_totals);
+	    var sub_classifica = resultat_sub_classifica[0];
+	    error = resultat_sub_classifica[1];
+
+	    for (var j = 0; j < sub_classifica.length; j++)
 	    {
-	        new_classificats.push(classificats[i]);
+	        new_classificats.push(_.findWhere(equips, {'id':sub_classifica[j].id}));
+	    }
+	    equips = new_classificats;
+	}
+    }
+    else
+    {
+	var i = 0;
+        var new_classificats = Array();
+
+	while(i < equips.length)
+	{
+	    if (i == (equips.length - 1) || !agrupa(equips[i], equips[i + 1]))
+	    {
+	        new_classificats.push(equips[i]);
 	    }
 	    else
 	    {
 		var sub_ids = Array();
-                sub_ids.push(classificats[i].id);
-		i++;
+                sub_ids.push(equips[i].id);
+                i++;
 
-		while(i < (classificats.length - 1) && agrupa(classificats[i], classificats[i + 1]))
-	        {
-                    sub_ids.push(classificats[i].id);
-		    i++;
-		}
-                sub_ids.push(classificats[i].id);
+                while(i < (equips.length - 1) && agrupa(equips[i], equips[i + 1]))
+                {
+                    sub_ids.push(equips[i].id);
+                    i++;
+                }
+                sub_ids.push(equips[i].id);
 
-	        var resultat_sub_classifica = classifica(sub_ids, resultats, nova_passada);
+		var sub_equips = ordena(sub_ids, resultats);
+
+	        var resultat_sub_classifica = classifica(resultats, sub_equips, 'punts', equips_totals);
 		var sub_classifica = resultat_sub_classifica[0];
 		error = resultat_sub_classifica[1];
 
-		if (error == 1 && nova_passada == 1)
+		if (error == 1)
 		{
-	            var resultat_sub_classifica2 = classifica(sub_ids, resultats, 2);
-		    var sub_classifica = resultat_sub_classifica2[0];
+	            var resultat_sub_classifica2 = classifica(resultats, sub_equips, 'altres', equips_totals);
+		    var sub_classifica2 = resultat_sub_classifica2[0];
 		    error2 = resultat_sub_classifica2[1];
 
 		    if (error2 == 0)
 		    {
-                        error = 0;
+			error = 0;
+			sub_classifica = sub_classifica2;
+		    }
+		    else
+		    {
+			var sub_equips2 = Array();
+
+			for (var j = 0; j < equips_totals.length; j++)
+			{
+			    var t = _.findWhere(sub_equips, {'id': equips_totals[j].id});
+			    if (t != null)
+                            {
+		                sub_equips2.push(_.findWhere(equips_totals, {'id': equips_totals[j].id}));
+			    }
+			}
+
+	                var resultat_sub_classifica3 = classifica(resultats, sub_equips2, 'altres', equips_totals);
+		        var sub_classifica3 = resultat_sub_classifica3[0];
+		        error3 = resultat_sub_classifica3[1];
+
+		        if (error3 == 0)
+		        {
+		            error = 0;
+		            sub_classifica = sub_classifica3;
+		        }
 		    }
 		}
 
 		for (var j = 0; j < sub_classifica.length; j++)
 		{
-		    new_classificats.push(_.findWhere(classificats, {'id':sub_classifica[j].id}));
+		    new_classificats.push(_.findWhere(equips, {'id':sub_classifica[j].id}));
 		}
 	    }
 	    i++;
 	}
-        classificats = new_classificats;
+	equips = new_classificats;
     }
         
-    return [classificats, error];
+    return [equips, error];
 }
 
 function actualitza()
@@ -175,7 +213,9 @@ function actualitza()
 
     resultats = genera_resultats(formulari);
 
-    var resultat_classificats = classifica(ids_equips, resultats, 1);
+    var classificats = ordena(ids_equips, resultats);
+    var classificats_totals = classificats;
+    var resultat_classificats = classifica(resultats, classificats, 'punts', classificats_totals);
     var classificats = resultat_classificats[0];
     var error = resultat_classificats[1];
 
