@@ -13,6 +13,13 @@
 
 {% block title %}Entrada dels resultats dels grups{% endblock %}
 
+{% block navegacio %}
+&nbsp;&nbsp;&gt;&nbsp;&nbsp;
+<a href="{% url 'joc:pronostic' %}">Entrada de Resultats</a>
+&nbsp;&nbsp;&gt;&nbsp;&nbsp;
+<a href="{% url 'joc:pronostic' %}?grup={{ grup }}">Grup {{ grup }}</a>
+{% endblock navegacio %}
+
 {% block content %}
 
 <form id="f1" name="f1" action="{% url 'joc:pronostic' %}?grup={{ seguent_grup }}" method="post">

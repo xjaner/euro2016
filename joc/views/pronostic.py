@@ -86,7 +86,9 @@ def pronostic(request):
             'height_banderes': 19,
             'width_banderes': 28,
             'border_banderes': 1,
+            'grup': grup.nom,
             'seguent_grup': seguent_grup,
             'deshabilita_submit': deshabilita_submit,
+            'jugador': jugador,
         }
     )
