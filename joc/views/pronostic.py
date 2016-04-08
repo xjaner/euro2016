@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.shortcuts import render
+from django.conf import settings
 
 from joc.models import Grup, Jugador, Equip, Partit, PronosticPartit, PronosticEquipGrup
 
@@ -16,16 +19,36 @@ class PartitForm(forms.ModelForm):
 
 
 GrupForm = forms.modelformset_factory(PronosticPartit, form=PartitForm, extra=0)
-# ClassificacioForm = forms.modelformset_factory(
-#     PronosticEquipGrup, fields=('equip', 'posicio', 'punts', 'diferencia', 'favor'),
-#     extra=0,
-# )
+
+
+def guarda_classificacio_grup(request, jugador):
+    for i in range(settings.EQUIPS_PER_GRUP):
+        equip = Equip.objects.get(pk=int(request.POST['id%d' % (i)]))
+        pronostic_equip = PronosticEquipGrup.objects.get(jugador=jugador,
+                                                         equip=equip)
+        pronostic_equip.posicio = i + 1
+        pronostic_equip.punts = int(request.POST['p%d' % (i)])
+        pronostic_equip.diferencia = int(request.POST['d%d' % (i)])
+        pronostic_equip.favor = int(request.POST['g%d' % (i)])
+        pronostic_equip.save()
+
 
 
 @login_required
 def pronostic(request):
-    import ipdb
-    ipdb.set_trace()
+
+    jugador = Jugador.objects.get(usuari=request.user)
+
+    # Si és un POST, guardem els valors del formulari
+    if request.method == 'POST':
+        grup_form = GrupForm(request.POST)
+        if grup_form.is_valid():
+            grup_form.save()
+        else:
+            # TODO: No sé què fer en aquest cas!
+            pass
+
+        guarda_classificacio_grup(request, jugador)
 
     form = None
     nom_grup = request.GET.get('grup', 'A')
@@ -35,7 +58,6 @@ def pronostic(request):
     except Grup.DoesNotExist:
         seguent_grup = 'G'
 
-    jugador = Jugador.objects.get(usuari=request.user)
     partits = Partit.objects.filter(grup=grup)
 
     # Creem els PronosticPartit que faltin
@@ -47,23 +69,24 @@ def pronostic(request):
 
     # Creem els PronosticEquipGrup que faltin
     equips_classificacio = []
+    deshabilita_submit = True
     for equip in Equip.objects.filter(grup__nom=grup):
         equip_classificacio, _ = PronosticEquipGrup.objects.get_or_create(jugador=jugador,
                                                                           equip=equip)
         equips_classificacio.append(equip_classificacio)
-
-    # classificacio_form = ClassificacioForm(queryset=PronosticEquipGrup.objects.filter(
-    #     jugador=jugador, equip__grup__nom=grup))
+        if equip_classificacio.posicio != 0:
+            deshabilita_submit = False
 
     return render(
         request,
         'joc/grup.html',
         {
             'formset': grup_form,
-            'equips_classificacio': equips_classificacio,
+            'equips_classificacio': sorted(equips_classificacio, key=lambda k: k.posicio),
             'height_banderes': 19,
             'width_banderes': 28,
             'border_banderes': 1,
             'seguent_grup': seguent_grup,
+            'deshabilita_submit': deshabilita_submit,
         }
     )

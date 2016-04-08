@@ -260,6 +260,11 @@ function actualitza()
     formulari.elements["g2"].value = classificats[2].gols;
     formulari.elements["g3"].value = classificats[3].gols;
 
+    formulari.elements["id0"].value = classificats[0].id;
+    formulari.elements["id1"].value = classificats[1].id;
+    formulari.elements["id2"].value = classificats[2].id;
+    formulari.elements["id3"].value = classificats[3].id;
+
     if (acabat == 1 && error == 1)
     {
         alert("ERROOOOR!");

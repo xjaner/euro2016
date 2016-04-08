@@ -18,11 +18,12 @@
 <td align="center" class="classif"><input type="text" size="2" name="p{{ forloop.counter0 }}" onFocus="this.blur()" value="{{ equip_classificacio.punts }}"></td>
 <td align="center" class="classif"><input type="text" size="2" name="d{{ forloop.counter0 }}" onFocus="this.blur()" value="{{ equip_classificacio.diferencia }}"></td>
 <td align="center" class="classif"><input type="text" size="2" name="g{{ forloop.counter0 }}" onFocus="this.blur()" value="{{ equip_classificacio.favor }}"></td>
+<input type="hidden" name="id{{ forloop.counter0 }}" value="{{ equip_classificacio.id }}">
 </tr>
 {% endfor %}
 </table>
 </div>
 <div class="boto_next">
-<input name="seguent" type="submit" class="boto_index" value="Següent grup" disabled>
+<input name="seguent" type="submit" class="boto_index" value="Següent grup" {% if deshabilita_submit %}disabled{% endif %}>
 </div>
 </div>
