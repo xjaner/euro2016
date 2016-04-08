@@ -54,6 +54,8 @@ class PronosticPartit(models.Model):
     partit = models.ForeignKey(Partit)
     gols1 = models.SmallIntegerField(default=-1)
     gols2 = models.SmallIntegerField(default=-1)
+    equip1 = models.ForeignKey(Equip, related_name='equip1_pronostic', null=True)
+    equip2 = models.ForeignKey(Equip, related_name='equip2_pronostic', null=True)
 
     def empat(self):
         return self.gols1 == self.gols2
