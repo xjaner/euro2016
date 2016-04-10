@@ -56,6 +56,14 @@ class PronosticPartit(models.Model):
     gols2 = models.SmallIntegerField(default=-1)
     equip1 = models.ForeignKey(Equip, related_name='equip1_pronostic', null=True)
     equip2 = models.ForeignKey(Equip, related_name='equip2_pronostic', null=True)
+    empat = models.PositiveSmallIntegerField(null=True)
 
-    def empat(self):
-        return self.gols1 == self.gols2
+    def guanyador(self):
+        if self.gols1 > self.gols2:
+            return self.equip1 or self.partit.equip1
+        elif self.gols2 > self.gols1:
+            return self.equip2 or self.partit.equip2
+        elif self.empat == 1:
+            return self.equip1 or self.partit.equip1
+        else:
+            return self.equip2 or self.partit.equip2
