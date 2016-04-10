@@ -35,8 +35,8 @@ class PronosticEquipGrup(models.Model):
     favor = models.PositiveSmallIntegerField(default=0)
 
 class Partit(models.Model):
-    equip1 = models.ForeignKey(Equip, related_name='equip1')
-    equip2 = models.ForeignKey(Equip, related_name='equip2')
+    equip1 = models.ForeignKey(Equip, related_name='equip1', null=True)
+    equip2 = models.ForeignKey(Equip, related_name='equip2', null=True)
     diaihora = models.DateTimeField()
     estadi = models.CharField(max_length=128)
     grup = models.ForeignKey(Grup)

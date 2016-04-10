@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from itertools import groupby
 
 from django.contrib.auth.decorators import login_required
 from django import forms
@@ -34,24 +35,71 @@ def guarda_classificacio_grup(request, jugador):
 
 
 
+def comprova_tercers(request, jugador):
+    funcio_ordre = lambda x: (x.punts, x.diferencia, x.favor)
+    tercers = PronosticEquipGrup.objects.filter(jugador=jugador,
+                                                posicio=3)
+    if len(tercers) != settings.NUM_GRUPS:
+        # TODO: ERROR!
+        pass
+
+    agrupats = [{grup: [i for i in elements]}
+                for grup, elements in groupby(sorted(tercers, key=funcio_ordre, reverse=True),
+                                              key=funcio_ordre)]
+
+    if len(agrupats) == settings.NUM_GRUPS:
+        # El millor dels casos
+        return
+    elif len(agrupats) == (settings.NUM_GRUPS - 1):
+        if len(agrupats[-1]) == 2:
+            # Empaten els 2 últims tercers, no m'importa! :)
+            return
+    else:
+        return [grup.values()[0] for grup in agrupats if len(grup.values()[0]) > 1]
+
+
+
+
+
+GUARDAR_GRUPS = set(['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+COMPROVAR_TERCERS = set(['G'])
+
+
 @login_required
 def pronostic(request):
 
     jugador = Jugador.objects.get(usuari=request.user)
+    nom_grup = request.GET.get('grup', 'A')
 
     # Si és un POST, guardem els valors del formulari
     if request.method == 'POST':
-        grup_form = GrupForm(request.POST)
-        if grup_form.is_valid():
-            grup_form.save()
-        else:
-            # TODO: No sé què fer en aquest cas!
-            pass
 
-        guarda_classificacio_grup(request, jugador)
+        # Si s'han de guardar classificacions d'equips
+        if nom_grup in GUARDAR_GRUPS:
+            grup_form = GrupForm(request.POST)
+            if grup_form.is_valid():
+                grup_form.save()
+            else:
+                # TODO: Falta crear una pàgina d'error i que em notifiqui!
+                pass
+            guarda_classificacio_grup(request, jugador)
+
+        if nom_grup in COMPROVAR_TERCERS:
+            tercers_empatats = comprova_tercers(request, jugador)
+
+            if tercers_empatats:
+                return render(
+                    request,
+                    'joc/tercers.html',
+                    {
+                        'formset': grup_form,
+                        'jugador': jugador,
+                        'tercers_empatats': tercers_empatats,
+                    }
+                )
+
 
     form = None
-    nom_grup = request.GET.get('grup', 'A')
     grup = Grup.objects.get(nom=nom_grup)
     try:
         seguent_grup = Grup.objects.get(id=grup.id + 1).nom
