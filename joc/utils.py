@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+from itertools import groupby
+
 from django.conf import settings
 
 from joc.models import PronosticPartit, PronosticEquipGrup, Equip
+
+FUNCIO_ORDRE = lambda x: (x.punts, x.diferencia, x.favor)
 
 POSICIO_TERCERS = {
     frozenset(['A', 'B', 'C', 'D']): {'WA': 'C', 'WB': 'D', 'WC': 'A', 'WD': 'B'},
@@ -25,7 +29,7 @@ def get_or_create_and_reset_pronostic_partit(id_partit, jugador, equip1, equip2)
     try:
         pronostic_partit = PronosticPartit.objects.get(jugador=jugador, partit_id=id_partit)
     except PronosticPartit.DoesNotExist:
-        PronosticPartit.objects.create(jugador=jugador, partit_id=partit, equip1_id=equip1,
+        PronosticPartit.objects.create(jugador=jugador, partit_id=id_partit, equip1_id=equip1,
                                        equip2_id=equip2)
     else:
         if pronostic_partit.equip1_id != equip1 or pronostic_partit.equip2_id != equip2:
@@ -131,7 +135,7 @@ def crea_quarts(request, jugador):
 def crea_vuitens(request, jugador):
     tercers = PronosticEquipGrup.objects.filter(jugador=jugador,
                                                 posicio=3)
-    tercers_ordenats = sorted(tercers, key=funcio_ordre, reverse=True)[:4]
+    tercers_ordenats = sorted(tercers, key=FUNCIO_ORDRE, reverse=True)[:4]
     grups_millors_tercers = frozenset([peg.equip.grup.nom for peg in tercers_ordenats])
     emparellaments_tercers = POSICIO_TERCERS[grups_millors_tercers]
 
@@ -262,11 +266,10 @@ def crea_partits(request, jugador, nom_grup):
         crea_quarts(request, jugador)
     elif nom_grup == 'I':
         crea_semis(request, jugador)
-    else nom_grup == 'J':
+    elif nom_grup == 'J':
         crea_final(request, jugador)
 
 def comprova_tercers(request, jugador):
-    funcio_ordre = lambda x: (x.punts, x.diferencia, x.favor)
     tercers = PronosticEquipGrup.objects.filter(jugador=jugador,
                                                 posicio=3)
     if len(tercers) != settings.NUM_GRUPS:
@@ -274,8 +277,8 @@ def comprova_tercers(request, jugador):
         pass
 
     agrupats = [{grup: [i for i in elements]}
-                for grup, elements in groupby(sorted(tercers, key=funcio_ordre, reverse=True),
-                                              key=funcio_ordre)]
+                for grup, elements in groupby(sorted(tercers, key=FUNCIO_ORDRE, reverse=True),
+                                              key=FUNCIO_ORDRE)]
 
     if len(agrupats) == settings.NUM_GRUPS:
         # El millor dels casos
