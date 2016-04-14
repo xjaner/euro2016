@@ -25,6 +25,7 @@ POSICIO_TERCERS = {
     frozenset(['C', 'D', 'E', 'F']): {'WA': 'C', 'WB': 'D', 'WC': 'F', 'WD': 'E'},
 }
 
+
 def get_or_create_and_reset_pronostic_partit(id_partit, jugador, equip1, equip2):
     try:
         pronostic_partit = PronosticPartit.objects.get(jugador=jugador, partit_id=id_partit)
@@ -37,6 +38,7 @@ def get_or_create_and_reset_pronostic_partit(id_partit, jugador, equip1, equip2)
             pronostic_partit.gols2 = -1
             pronostic_partit.empat = None
             pronostic_partit.save()
+
 
 def crea_final(request, jugador):
     get_or_create_and_reset_pronostic_partit(
@@ -51,6 +53,7 @@ def crea_final(request, jugador):
             partit_id=50
         ).guanyador().id,
     )
+
 
 def crea_semis(request, jugador):
     get_or_create_and_reset_pronostic_partit(
@@ -78,6 +81,7 @@ def crea_semis(request, jugador):
             partit_id=48
         ).guanyador().id,
     )
+
 
 def crea_quarts(request, jugador):
     get_or_create_and_reset_pronostic_partit(
@@ -131,6 +135,7 @@ def crea_quarts(request, jugador):
             partit_id=44
         ).guanyador().id,
     )
+
 
 def crea_vuitens(request, jugador):
     tercers = PronosticEquipGrup.objects.filter(jugador=jugador,
@@ -259,6 +264,7 @@ def crea_vuitens(request, jugador):
         ).equip.id,
     )
 
+
 def crea_partits(request, jugador, nom_grup):
     if nom_grup == 'G':
         crea_vuitens(request, jugador)
@@ -268,6 +274,7 @@ def crea_partits(request, jugador, nom_grup):
         crea_semis(request, jugador)
     elif nom_grup == 'J':
         crea_final(request, jugador)
+
 
 def comprova_tercers(request, jugador):
     tercers = PronosticEquipGrup.objects.filter(jugador=jugador,
@@ -290,6 +297,7 @@ def comprova_tercers(request, jugador):
     else:
         return [grup.values()[0] for grup in agrupats if len(grup.values()[0]) > 1]
 
+
 def guarda_classificacio_grup(request, jugador):
     for i in range(settings.EQUIPS_PER_GRUP):
         equip = Equip.objects.get(pk=int(request.POST['id%d' % (i)]))
@@ -300,4 +308,3 @@ def guarda_classificacio_grup(request, jugador):
         pronostic_equip.diferencia = int(request.POST['d%d' % (i)])
         pronostic_equip.favor = int(request.POST['g%d' % (i)])
         pronostic_equip.save()
-
