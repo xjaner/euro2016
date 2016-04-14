@@ -5,6 +5,9 @@
 {% block stylesheets %}
 <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
 <link rel="stylesheet" type="text/css" href="{% static "css/estil_grup.css" %}">
+{% if not equips_classificacio %}
+<link rel="stylesheet" type="text/css" href="{% static "css/estil_eliminatoria.css" %}">
+{% endif %}
 {% endblock stylesheets %}
 {% block scripts %}
 <script src="{% static "js/funcions.js" %}"></script>
@@ -24,6 +27,7 @@
 
 <form id="f1" name="f1" action="{% url 'joc:pronostic' %}?grup={{ seguent_grup }}" method="post">
 {% csrf_token %}
+<input type="hidden" name="num-partits" value="{{ formset|length }}">
 <div id="resultats">
 {{ formset.management_form }}
 {% for form in formset %}
@@ -40,7 +44,11 @@
 {% else %}
 <div class="partit2">
 {% endif %}
+{% if equips_classificacio %}
 {% include "joc/partit.html" %}
+{% else %}
+{% include "joc/partit_eliminatoria.html" %}
+{% endif %}
 </div>
 {% if not forloop.counter0|divisibleby:2 %}
 </div>

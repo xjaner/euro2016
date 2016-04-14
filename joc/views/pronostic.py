@@ -9,22 +9,7 @@ from joc.utils import crea_partits, comprova_tercers, guarda_classificacio_grup
 
 GOLS_CHOICES = (('-1', '-'), (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
                 (8, 8))
-
-
-class PartitForm(forms.ModelForm):
-    gols1 = forms.ChoiceField(choices=GOLS_CHOICES,
-                              widget=forms.Select(attrs={"onChange": 'actualitza()'}))
-    gols2 = forms.ChoiceField(choices=GOLS_CHOICES,
-                              widget=forms.Select(attrs={"onChange": 'actualitza()'}))
-
-    class Meta:
-        model = PronosticPartit
-        fields = ('gols1', 'gols2')
-
-
-GrupForm = forms.modelformset_factory(PronosticPartit, form=PartitForm, extra=0)
-
-
+EMPAT_CHOICES = ((1, 1), (2, 2))
 GUARDA_PARTITS = set(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'])
 FASE_GRUPS = set(['A', 'B', 'C', 'D', 'E', 'F'])
 CREA_PARTITS = set(['G', 'H', 'I', 'J'])
@@ -41,6 +26,36 @@ TEXT_GRUP = {
     'I': 'Semifinals',
     'J': 'Final',
 }
+
+
+class PartitForm(forms.ModelForm):
+    gols1 = forms.ChoiceField(choices=GOLS_CHOICES,
+                              widget=forms.Select(attrs={"onChange": 'actualitza()'}))
+    gols2 = forms.ChoiceField(choices=GOLS_CHOICES,
+                              widget=forms.Select(attrs={"onChange": 'actualitza()'}))
+    empat = forms.ChoiceField(choices=EMPAT_CHOICES,
+                              widget=forms.RadioSelect)
+
+    def __init__(self, *args, **kwargs):
+        super(PartitForm, self).__init__(*args, **kwargs)
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk and ((instance.gols1 == -1 and instance.gols2 == -1) or (
+                instance.gols1 != -1 and instance.gols1 != instance.gols2)):
+            self.fields['empat'].widget.attrs['disabled'] = True
+
+        if instance.partit.grup.nom in FASE_GRUPS:
+            self.fields['gols1'].widget.attrs['onChange'] = 'actualitza()'
+            self.fields['gols2'].widget.attrs['onChange'] = 'actualitza()'
+        else:
+            self.fields['gols1'].widget.attrs['onChange'] = 'actualitzaEliminatoria()'
+            self.fields['gols2'].widget.attrs['onChange'] = 'actualitzaEliminatoria()'
+
+    class Meta:
+        model = PronosticPartit
+        fields = ('gols1', 'gols2', 'empat')
+
+
+GrupForm = forms.modelformset_factory(PronosticPartit, form=PartitForm, extra=0)
 
 
 @login_required

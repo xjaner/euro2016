@@ -279,3 +279,30 @@ function actualitza()
         formulari.elements["seguent"].disabled = true;
     }
 }
+
+function actualitzaEliminatoria()
+{
+    var formulari = document.getElementById("f1");
+    var num_partits = formulari.elements["num-partits"].value;
+
+    for (var i=0;i<num_partits;i++)
+    {
+        var gols1 = "form-"+i+"-gols1";
+        var gols2 = "form-"+i+"-gols2";
+        var form = "form-"+i+"-empat";
+
+        if (formulari.elements[gols1].value == formulari.elements[gols2].value)
+        {
+            for (var j=0, iLen=formulari.elements[form].length; j<iLen; j++) {
+                formulari.elements[form][j].disabled = false;
+            } 
+        }
+        else
+        {
+            for (var j=0, iLen=formulari.elements[form].length; j<iLen; j++) {
+                formulari.elements[form][j].disabled = true;
+                formulari.elements[form][j].checked = false;
+            } 
+        }
+    }
+}
