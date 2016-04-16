@@ -120,7 +120,7 @@ msgstr "Pàgina de registre pel joc de l'Eurocopa 2016"
 #: templates/registration/registration_form.html:8
 msgid "Once you are registered, you'll receive an email with the instructions"
 msgstr ""
-"Aquesta pàgina serveix per registrar-te. Un cop fet el registre, rebràs un "
+"<h2>Benvingut al Joc de l'Eurocopa 2016!</h2>Aquesta pàgina serveix per registrar-te.<br>Un cop fet el registre, rebràs un "
 "email amb les instruccions per activar el teu compte."
 
 #: templates/registration/registration_form.html:13

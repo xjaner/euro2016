@@ -24,10 +24,14 @@
     </div>
 
     <div id="barra2">
+    {% if jugador %}
     <strong>
     {{ jugador.usuari.username }}
     </strong>
     <a href="/logout">Desconnecta</a>
+    {% else %}
+    &nbsp;
+    {% endif %}
     </div>
     </div>
 
