@@ -175,6 +175,13 @@
     },
     {
         "fields": {
+            "nom": "K"
+        },
+        "model": "joc.grup",
+        "pk": 11
+    },
+    {
+        "fields": {
             "bandera": "franca.png",
             "grup": 1,
             "nom": "Fran\u00e7a"

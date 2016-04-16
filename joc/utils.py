@@ -26,14 +26,16 @@ POSICIO_TERCERS = {
 }
 
 
-def get_or_create_and_reset_pronostic_partit(id_partit, jugador, equip1, equip2):
+def get_or_create_and_reset_pronostic_partit(id_partit, jugador, id_equip1, id_equip2):
     try:
         pronostic_partit = PronosticPartit.objects.get(jugador=jugador, partit_id=id_partit)
     except PronosticPartit.DoesNotExist:
-        PronosticPartit.objects.create(jugador=jugador, partit_id=id_partit, equip1_id=equip1,
-                                       equip2_id=equip2)
+        PronosticPartit.objects.create(jugador=jugador, partit_id=id_partit, equip1_id=id_equip1,
+                                       equip2_id=id_equip2)
     else:
-        if pronostic_partit.equip1_id != equip1 or pronostic_partit.equip2_id != equip2:
+        if pronostic_partit.equip1_id != id_equip1 or pronostic_partit.equip2_id != id_equip2:
+            pronostic_partit.equip1_id = id_equip1
+            pronostic_partit.equip2_id = id_equip2
             pronostic_partit.gols1 = -1
             pronostic_partit.gols2 = -1
             pronostic_partit.empat = None

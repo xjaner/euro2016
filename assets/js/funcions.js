@@ -285,17 +285,33 @@ function actualitzaEliminatoria()
     var formulari = document.getElementById("f1");
     var num_partits = formulari.elements["num-partits"].value;
 
+    acabat = 1;
     for (var i=0;i<num_partits;i++)
     {
         var gols1 = "form-"+i+"-gols1";
         var gols2 = "form-"+i+"-gols2";
         var form = "form-"+i+"-empat";
 
-        if (formulari.elements[gols1].value == formulari.elements[gols2].value)
+	if (formulari.elements[gols1].value < 0 || formulari.elements[gols2].value < 0)
+	{
+            acabat = 0;
+	}
+	else if (formulari.elements[gols1].value == formulari.elements[gols2].value)
         {
+	    empat_seleccionat = 0;
             for (var j=0, iLen=formulari.elements[form].length; j<iLen; j++) {
                 formulari.elements[form][j].disabled = false;
+
+		if (formulari.elements[form][j].checked)
+		{
+                    empat_seleccionat = 1;
+		}
             } 
+
+	    if (!empat_seleccionat)
+	    {
+                acabat = 0;
+	    }
         }
         else
         {
@@ -304,5 +320,15 @@ function actualitzaEliminatoria()
                 formulari.elements[form][j].checked = false;
             } 
         }
+
+    }
+
+    if (acabat == 1)
+    {
+        formulari.elements["seguent"].removeAttribute('disabled');
+    }
+    else
+    {
+        formulari.elements["seguent"].disabled = true;
     }
 }

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
 from django import forms
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from joc.models import Grup, Jugador, Equip, Partit, PronosticPartit, PronosticEquipGrup
 from joc.utils import crea_partits, comprova_tercers, guarda_classificacio_grup
@@ -10,10 +10,10 @@ from joc.utils import crea_partits, comprova_tercers, guarda_classificacio_grup
 GOLS_CHOICES = (('-1', '-'), (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
                 (8, 8))
 EMPAT_CHOICES = ((1, 1), (2, 2))
-GUARDA_PARTITS = set(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'])
 FASE_GRUPS = set(['A', 'B', 'C', 'D', 'E', 'F'])
 CREA_PARTITS = set(['G', 'H', 'I', 'J'])
 COMPROVAR_TERCERS = set(['G'])
+ACABA_PRONOSTIC = set(['K'])
 TEXT_GRUP = {
     'A': 'Grup A',
     'B': 'Grup B',
@@ -34,7 +34,8 @@ class PartitForm(forms.ModelForm):
     gols2 = forms.ChoiceField(choices=GOLS_CHOICES,
                               widget=forms.Select(attrs={"onChange": 'actualitza()'}))
     empat = forms.ChoiceField(choices=EMPAT_CHOICES,
-                              widget=forms.RadioSelect)
+                              widget=forms.RadioSelect,
+                              required=False)
 
     def __init__(self, *args, **kwargs):
         super(PartitForm, self).__init__(*args, **kwargs)
@@ -49,6 +50,7 @@ class PartitForm(forms.ModelForm):
         else:
             self.fields['gols1'].widget.attrs['onChange'] = 'actualitzaEliminatoria()'
             self.fields['gols2'].widget.attrs['onChange'] = 'actualitzaEliminatoria()'
+            self.fields['empat'].widget.attrs['onChange'] = 'actualitzaEliminatoria()'
 
     class Meta:
         model = PronosticPartit
@@ -68,16 +70,16 @@ def pronostic(request):
     if request.method == 'POST':
 
         # Si s'han de guardar classificacions d'equips
-        if nom_grup in GUARDA_PARTITS:
-            grup_form = GrupForm(request.POST)
-            if grup_form.is_valid():
-                grup_form.save()
-            else:
-                # TODO: Falta crear una pàgina d'error i que em notifiqui!
-                pass
-            guarda_classificacio_grup(request, jugador)
+        grup_form = GrupForm(request.POST)
+        if grup_form.is_valid():
+            grup_form.save()
+        else:
+            # TODO: Falta crear una pàgina d'error i que em notifiqui!
+            pass
 
-        if nom_grup in CREA_PARTITS:
+        if nom_grup in FASE_GRUPS:
+            guarda_classificacio_grup(request, jugador)
+        else:
             crea_partits(request, jugador, nom_grup)
 
         if nom_grup in COMPROVAR_TERCERS:
@@ -93,6 +95,9 @@ def pronostic(request):
                         'tercers_empatats': tercers_empatats,
                     }
                 )
+
+    if nom_grup in ACABA_PRONOSTIC:
+        return redirect('/joc')
 
     grup = Grup.objects.get(nom=nom_grup)
     try:
@@ -115,7 +120,6 @@ def pronostic(request):
         jugador=jugador, partit__grup__nom=grup))
 
     equips_classificacio = []
-    deshabilita_submit = True
     template = 'grup.html'
     if nom_grup in FASE_GRUPS:
 
@@ -128,6 +132,15 @@ def pronostic(request):
             equips_classificacio.append(equip_classificacio)
             if equip_classificacio.posicio != 0:
                 deshabilita_submit = False
+    else:
+        deshabilita_submit = False
+        for form in grup_form.forms:
+            if form.instance.gols1 == -1 or form.instance.gols2 == -1:
+                deshabilita_submit = True
+                break
+            elif form.instance.gols1 == form.instance.gols2 and not form.instance.empat:
+                deshabilita_submit = True
+                break
 
     return render(
         request,
