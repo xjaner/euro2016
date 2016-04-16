@@ -291,13 +291,14 @@ def comprova_tercers(request, jugador):
 
     if len(agrupats) == settings.NUM_GRUPS:
         # El millor dels casos
-        return
+        return None
     elif len(agrupats) == (settings.NUM_GRUPS - 1):
         if len(agrupats[-1]) == 2:
             # Empaten els 2 últims tercers, no m'importa! :)
-            return
+            return None
     else:
-        return [grup.values()[0] for grup in agrupats if len(grup.values()[0]) > 1]
+        # return [grup.values()[0] for grup in agrupats if len(grup.values()[0]) > 1]
+        return sorted(tercers, key=FUNCIO_ORDRE, reverse=True)
 
 
 def guarda_classificacio_grup(request, jugador):

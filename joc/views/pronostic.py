@@ -92,7 +92,12 @@ def pronostic(request):
                     {
                         'formset': grup_form,
                         'jugador': jugador,
-                        'tercers_empatats': tercers_empatats,
+                        'tercers': tercers_empatats,
+                        'text_grup': 'Tercers empatats',
+                        'grup': 'F',
+                        'height_banderes': 19,
+                        'width_banderes': 28,
+                        'border_banderes': 1,
                     }
                 )
 

@@ -106,3 +106,30 @@ width: 48%;
 margin-right: 2%;
 }
 
+
+#classificacio_tercers
+{
+font-size: 12px;
+}
+
+#classificacio_tercers a
+{
+color: black;
+text-decoration: none;
+}
+
+#classificacio_tercers a:hover
+{
+text-decoration: underline;
+}
+
+#avis
+{
+font-size: 14px;
+}
+
+#avis a
+{
+font-size: 14px;
+color: black;
+}
