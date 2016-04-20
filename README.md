@@ -7,5 +7,4 @@ Quan canviï qualsevol traducció, s'ha de fer:
 python manage.py compilemessages --settings=euro2016.settings.local
 
 Coses que falten per arreglar:
-- Al subject del mail d'acceptació del registre hi posa "[example.com]"
 - Assegurar-me que el host és correcte al mail d'acceptació del registre

@@ -110,8 +110,8 @@ msgstr ""
 
 #: templates/registration/registration_email_subject.txt:2
 #, python-format
-msgid "Your registration was created -- %(site_name)s"
-msgstr "[%(site_name)s] S'ha creat el teu registre"
+msgid "Your registration was created"
+msgstr "[Euro 2016] S'ha creat el teu registre"
 
 #: templates/registration/registration_form.html:4
 msgid "Registration page for the Eurocup 2016 game"
