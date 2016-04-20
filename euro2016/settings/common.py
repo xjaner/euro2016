@@ -51,7 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.sites',
+    'django.contrib.sites',
     'joc',
     'registration',
     'registration.supplements.default',
@@ -117,7 +117,7 @@ STATIC_URL = '/static/'
 REGISTRATION_SUPPLEMENT_CLASS = 'registration_supplement.models.RegistrationSupplement'
 
 # sites framework - 'django.contrib.sites'
-# SITE_ID = 1
+SITE_ID = 1
 
 # django-inspectional-registration
 DEFAULT_FROM_EMAIL = 'xjaner@gmail.com'

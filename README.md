@@ -6,5 +6,4 @@ Per modificar les traduccions d'apps instal.lades he fet servir el que expliquen
 Quan canviï qualsevol traducció, s'ha de fer:
 python manage.py compilemessages --settings=euro2016.settings.local
 
-Coses que falten per arreglar:
-- Assegurar-me que el host és correcte al mail d'acceptació del registre
+Quan faci deploy, he de configurar el nom i domini del Lloc a través de l'Admin > Llocs.
