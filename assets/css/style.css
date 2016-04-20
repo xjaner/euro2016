@@ -133,3 +133,38 @@ font-size: 14px;
 font-size: 14px;
 color: black;
 }
+
+.nocolor a
+{
+color: blue;
+text-decoration: none;
+}
+
+.nocolor a:hover
+{
+text-decoration: underline;
+}
+
+ul.nav
+{
+    font-size: 28px;
+    color: blue;
+    list-style-type: none;
+}
+
+ul.nav li
+{
+    margin: 10px 0;
+}
+
+ul.nav a
+{
+    color: blue;
+    text-decoration: none;
+}
+
+ul.nav a:hover
+{
+text-decoration: underline;
+}
+

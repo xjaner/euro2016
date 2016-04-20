@@ -6,7 +6,7 @@
 {% block content %}
 
 {% block nav %}
-<ul id="nav">
+<ul class="nav">
     <li>{% block nav-pronostic %}<a href="{% url 'joc:pronostic' %}">{% trans "Fes el pronòstic" %}</a>{% endblock %}</li>
     <li>{% block nav-consulta %}<a href="{% url 'joc:consulta' %}">{% trans "Consulta el pronòstic" %}</a>{% endblock %}</li>
     <li>{% block nav-usuaris %}<a href="{% url 'joc:usuaris' %}">{% trans "Llistat d'usuaris" %}</a>{% endblock %}</li>
