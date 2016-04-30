@@ -144,7 +144,7 @@ msgstr "Inicia la sessió"
 
 #: templates/registration/login.html:9
 msgid "Please fill your username and password to login"
-msgstr "Introdueix el teu nom d'usuari i la contrasenya per iniciar la sessió"
+msgstr "Introdueix el teu nom d'usuari i la contrasenya per iniciar la sessió:"
 
 #: templates/registration/logout.html:4
 #: templates/registration/logout.html:8
@@ -154,3 +154,10 @@ msgstr "Desconnectat"
 #: templates/registration/login.html:9
 msgid "You are logged out."
 msgstr "S'ha tancat la teva sessió."
+
+#: templates/registration/login.html:9
+msgid ""
+"Please enter a correct %(username)s and password. Note that both fields may "
+"be case-sensitive."
+msgstr "Nom d'usuari o contrasenya incorrectes."
+

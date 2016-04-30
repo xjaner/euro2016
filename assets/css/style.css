@@ -134,10 +134,15 @@ font-size: 14px;
 color: black;
 }
 
+.login_table
+{
+width: 600px;
+}
+
 .nocolor a
 {
-color: blue;
-text-decoration: none;
+color: black;
+text-decoration: underline;
 }
 
 .nocolor a:hover
@@ -168,3 +173,7 @@ ul.nav a:hover
 text-decoration: underline;
 }
 
+.vermell
+{
+color: red;
+}
