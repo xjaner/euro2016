@@ -69,7 +69,6 @@ def pronostic(request):
     # Si és un POST, guardem els valors del formulari
     if request.method == 'POST':
 
-        # Si s'han de guardar classificacions d'equips
         grup_form = GrupForm(request.POST)
         if grup_form.is_valid():
             grup_form.save()
@@ -77,6 +76,7 @@ def pronostic(request):
             # TODO: Falta crear una pàgina d'error i que em notifiqui!
             pass
 
+        # Si s'han de guardar classificacions d'equips
         if nom_grup in FASE_GRUPS:
             guarda_classificacio_grup(request, jugador)
         else:
@@ -102,7 +102,7 @@ def pronostic(request):
                 )
 
     if nom_grup in ACABA_PRONOSTIC:
-        return redirect('/joc')
+        return redirect('/')
 
     grup = Grup.objects.get(nom=nom_grup)
     try:
