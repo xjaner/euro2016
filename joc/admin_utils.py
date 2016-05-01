@@ -2,6 +2,7 @@
 from itertools import chain
 
 from django.conf import settings
+from django.db.models import Q
 
 from joc.models import Jugador, Partit, PronosticPartit, PronosticEquipGrup
 from joc.utils import (FASE_GRUPS, VUITENS, QUARTS, SEMIS, FINAL, ULTIM_PARTIT_GRUPS,
@@ -58,7 +59,7 @@ def obte_equips_fase_jugador(jugador, fase):
 
 
 def actualitza_partit_grups(partit):
-    for jugador in Jugador.objects.filter(usuari__is_active=True):
+    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(~Q(usuari_id=1)):
         punts_resultats = 0
         punts_grups = 0
         punts_equips_encertats = 0
@@ -139,7 +140,7 @@ def actualitza_partit_grups(partit):
 
 
 def actualitza_partit_vuitens(partit):
-    for jugador in Jugador.objects.filter(usuari__is_active=True):
+    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(~Q(usuari_id=1)):
         punts_resultats = 0
         punts_grups = 0
         punts_equips_encertats = 0
@@ -186,7 +187,7 @@ def actualitza_partit_vuitens(partit):
 
 
 def actualitza_partit_quarts(partit):
-    for jugador in Jugador.objects.filter(usuari__is_active=True):
+    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(~Q(usuari_id=1)):
         punts_resultats = 0
         punts_grups = 0
         punts_equips_encertats = 0
@@ -227,7 +228,7 @@ def actualitza_partit_quarts(partit):
 
 
 def actualitza_partit_semis(partit):
-    for jugador in Jugador.objects.filter(usuari__is_active=True):
+    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(~Q(usuari_id=1)):
         punts_resultats = 0
         punts_grups = 0
         punts_equips_encertats = 0
@@ -261,11 +262,41 @@ def actualitza_partit_semis(partit):
         jugador.punts_grups += punts_grups
         jugador.punts_equips_encertats += punts_equips_encertats
         jugador.save()
-    pass
 
 
 def actualitza_partit_final(partit):
-    pass
+    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(~Q(usuari_id=1)):
+        punts_resultats = 0
+        punts_grups = 0
+        punts_equips_encertats = 0
+
+        pronostic = PronosticPartit.objects.get(partit_id=partit.id,
+                                                jugador_id=jugador.id)
+        if (partit.equip1.id == pronostic.equip1.id and
+                partit.equip2.id == pronostic.equip2.id):
+            punts_grups += 15
+
+            if partit.resultat_encertat(pronostic):
+                punts_resultats += 14
+            elif partit.signe_encertat(pronostic):
+                punts_resultats += 10
+
+        # TODO: Punts pel guanyador i finalista
+
+        jugador.punts_anterior = jugador.punts
+        jugador.punts += punts_resultats + punts_grups + punts_equips_encertats
+        jugador.punts_resultats += punts_resultats
+        jugador.punts_grups += punts_grups
+        jugador.punts_equips_encertats += punts_equips_encertats
+        jugador.save()
+
+
+def actualitza_posicions():
+    for posicio, jugador in enumerate(Jugador.objects.filter(
+            usuari__is_active=True).filter(~Q(usuari_id=1)).order_by('punts')):
+        jugador.posicio_anterior = jugador.posicio
+        jugador.posicio = posicio + 1
+        jugador.save()
 
 
 def actualitza_classificacio(admin_form):
@@ -280,3 +311,4 @@ def actualitza_classificacio(admin_form):
             actualitza_partit_semis(form.instance)
         elif form.instance.grup.nom in FINAL:
             actualitza_partit_final(form.instance)
+    actualitza_posicions()
