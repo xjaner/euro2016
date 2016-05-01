@@ -1271,6 +1271,21 @@
     },
     {
         "fields": {
+            "usuari": 1,
+            "pagat": true,
+            "posicio": 1,
+            "posicio_anterior": 1,
+            "punts": 0,
+            "punts_anterior": 0,
+            "punts_resultats": 0,
+            "punts_grups": 0,
+            "punts_equips_encertats": 0
+        },
+        "model": "joc.jugador",
+        "pk": 1
+    },
+    {
+        "fields": {
             "action_flag": 1,
             "action_time": "2015-12-18T19:23:59.641Z",
             "change_message": "",

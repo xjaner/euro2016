@@ -47,7 +47,15 @@ class Partit(models.Model):
     grup = models.ForeignKey(Grup)
     gols1 = models.SmallIntegerField(default=-1)
     gols2 = models.SmallIntegerField(default=-1)
-    empat = models.PositiveSmallIntegerField(null=True, default=None, blank=True)
+    empat = models.PositiveSmallIntegerField(null=True)
+
+    def signe(self):
+        if self.gols1 > self.gols2:
+            return 1
+        elif self.gols2 > self.gols1:
+            return 2
+        else:
+            return 0
 
     def __unicode__(self):
         return u'[{pk}- {grup}] {equip1} - {equip2}'.format(
@@ -56,6 +64,12 @@ class Partit(models.Model):
             equip1=self.equip1,
             equip2=self.equip2,
         )
+
+    def resultat_encertat(self, pronostic):
+        return (self.gols1 == pronostic.gols1 and self.gols2 == pronostic.gols2)
+
+    def signe_encertat(self, pronostic):
+        return self.signe() == pronostic.signe()
 
 
 class PronosticPartit(models.Model):
@@ -66,6 +80,14 @@ class PronosticPartit(models.Model):
     equip1 = models.ForeignKey(Equip, related_name='equip1_pronostic', null=True)
     equip2 = models.ForeignKey(Equip, related_name='equip2_pronostic', null=True)
     empat = models.PositiveSmallIntegerField(null=True)
+
+    def signe(self):
+        if self.gols1 > self.gols2:
+            return 1
+        elif self.gols2 > self.gols1:
+            return 2
+        else:
+            return 0
 
     def guanyador(self):
         if self.gols1 > self.gols2:

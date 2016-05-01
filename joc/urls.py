@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^consulta$', views.consulta, name='consulta'),
     url(r'^usuaris$', views.usuaris, name='usuaris'),
     url(r'^entrada_admin$', views.entrada_admin, name='entrada_admin'),
+    url(r'^pronostic_admin$', views.pronostic_admin, name='pronostic_admin'),
 ]

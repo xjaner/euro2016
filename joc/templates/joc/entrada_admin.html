@@ -8,8 +8,19 @@
 {% endblock stylesheets %}
 
 {% block scripts %}
-<script src="{% static "js/funcions.js" %}"></script>
 <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+<script language="Javascript">
+<!--
+function admin_actualitza()
+{
+	if(f1.accepto.checked==false){
+		alert("Has d'acceptar les normes per poder-te registrar!")
+	}else{
+		document.f1.submit()
+	}
+}
+-->
+</script>
 {% endblock scripts %}
 
 {% block title %}Entrada dels resultats de l'Administrador{% endblock %}
@@ -17,7 +28,9 @@
 
 {% block content %}
 
-{% if formset|length == 0 %}
+{% if cal_entrar_grups %}
+Abans d'entrar aquests resultats cal entrar els partits de la fase següent des de l'Admin.
+{% elif formset|length == 0 %}
 No hi ha resultats per actualitzar.
 {% else %}
 <form id="f1" name="f1" action="{% url 'joc:entrada_admin' %}" method="post">

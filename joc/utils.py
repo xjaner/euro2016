@@ -5,6 +5,36 @@ from django.conf import settings
 
 from joc.models import PronosticPartit, PronosticEquipGrup, Equip
 
+GOLS_CHOICES = (('-1', '-'), (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
+                (8, 8))
+EMPAT_CHOICES = ((1, 1), (2, 2))
+FASE_GRUPS = set(['A', 'B', 'C', 'D', 'E', 'F'])
+VUITENS = set(['G'])
+QUARTS = set(['H'])
+SEMIS = set(['I'])
+FINAL = set(['J'])
+CREA_PARTITS = set(['G', 'H', 'I', 'J'])
+COMPROVAR_TERCERS = set(['G'])
+ACABA_PRONOSTIC = set(['K'])
+TEXT_GRUP = {
+    'A': 'Grup A',
+    'B': 'Grup B',
+    'C': 'Grup C',
+    'D': 'Grup D',
+    'E': 'Grup E',
+    'F': 'Grup F',
+    'G': 'Vuitens de final',
+    'H': 'Quarts de final',
+    'I': 'Semifinals',
+    'J': 'Final',
+}
+
+ULTIM_PARTIT_GRUPS = 36
+ULTIM_PARTIT_VUITENS = 44
+ULTIM_PARTIT_QUARTS = 48
+ULTIM_PARTIT_SEMIS = 50
+
+
 FUNCIO_ORDRE = lambda x: (x.punts, x.diferencia, x.favor)
 
 POSICIO_TERCERS = {

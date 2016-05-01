@@ -4,28 +4,9 @@ from django import forms
 from django.shortcuts import redirect, render
 
 from joc.models import Grup, Jugador, Equip, Partit, PronosticPartit, PronosticEquipGrup
-from joc.utils import crea_partits, comprova_tercers, guarda_classificacio_grup
-
-
-GOLS_CHOICES = (('-1', '-'), (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
-                (8, 8))
-EMPAT_CHOICES = ((1, 1), (2, 2))
-FASE_GRUPS = set(['A', 'B', 'C', 'D', 'E', 'F'])
-CREA_PARTITS = set(['G', 'H', 'I', 'J'])
-COMPROVAR_TERCERS = set(['G'])
-ACABA_PRONOSTIC = set(['K'])
-TEXT_GRUP = {
-    'A': 'Grup A',
-    'B': 'Grup B',
-    'C': 'Grup C',
-    'D': 'Grup D',
-    'E': 'Grup E',
-    'F': 'Grup F',
-    'G': 'Vuitens de final',
-    'H': 'Quarts de final',
-    'I': 'Semifinals',
-    'J': 'Final',
-}
+from joc.utils import (
+    GOLS_CHOICES, EMPAT_CHOICES, FASE_GRUPS, COMPROVAR_TERCERS, ACABA_PRONOSTIC, TEXT_GRUP,
+    crea_partits, comprova_tercers, guarda_classificacio_grup)
 
 
 class PartitForm(forms.ModelForm):

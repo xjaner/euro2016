@@ -6,18 +6,16 @@ from django import forms
 from django.contrib.admin.views.decorators import staff_member_required
 
 from joc.models import Partit
-
-
-GOLS_CHOICES = (('-1', '-'), (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
-                (8, 8))
-EMPAT_CHOICES = ((1, 1), (2, 2))
+from joc.utils import GOLS_CHOICES, EMPAT_CHOICES
+from joc.admin_utils import actualitza_classificacio, seguent_grup_entrat
+from joc.views import pronostic
 
 
 class PartitAdminForm(forms.ModelForm):
     gols1 = forms.ChoiceField(choices=GOLS_CHOICES,
-                              widget=forms.Select(attrs={"onChange": 'actualitza()'}))
+                              widget=forms.Select(attrs={"onChange": 'admin_actualitza()'}))
     gols2 = forms.ChoiceField(choices=GOLS_CHOICES,
-                              widget=forms.Select(attrs={"onChange": 'actualitza()'}))
+                              widget=forms.Select(attrs={"onChange": 'admin_actualitza()'}))
     empat = forms.ChoiceField(choices=EMPAT_CHOICES,
                               widget=forms.RadioSelect,
                               required=False)
@@ -34,14 +32,10 @@ PartitsAdminForm = forms.modelformset_factory(
 )
 
 
-def actualitza_classificacio(request):
-    pass
-
-
 @staff_member_required
 def entrada_admin(request):
     # Si és un POST, guardem els valors del formulari
-    if request.method == 'POST':
+    if request.method == "POST":
 
         admin_form = PartitsAdminForm(request.POST)
         if admin_form.is_valid():
@@ -51,7 +45,7 @@ def entrada_admin(request):
             pass
 
         try:
-            actualitza_classificacio(request)
+            actualitza_classificacio(admin_form)
         except Exception:
             # TODO: Falta crear una pàgina d'error i que em notifiqui!
             pass
@@ -63,6 +57,8 @@ def entrada_admin(request):
         )
     )
 
+    cal_entrar_grups = seguent_grup_entrat(admin_form)
+
     return render(
         request,
         'joc/entrada_admin.html',
@@ -71,5 +67,11 @@ def entrada_admin(request):
             'height_banderes': 19,
             'width_banderes': 28,
             'border_banderes': 1,
+            'cal_entrar_grups': cal_entrar_grups,
         }
     )
+
+
+@staff_member_required
+def pronostic_admin(request):
+    return pronostic(request)
