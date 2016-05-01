@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.views import generic
+
+from joc.models import Jugador
 
 
-@login_required
-def usuaris(request):
-    return render(request, 'joc/index.html')
+class UsuarisView(generic.ListView):
+    def get_queryset(self):
+        return Jugador.objects.filter(usuari__is_active=True).filter(~Q(usuari_id=1))
