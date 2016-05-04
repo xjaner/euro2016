@@ -1,7 +1,11 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.views import generic
+
+from joc.models import PronosticPartit
 
 
-@login_required
-def consulta(request):
-    return render(request, 'joc/index.html')
+class ConsultaView(generic.ListView):
+    template_name = 'joc/consulta.html'
+    context_object_name = 'pronostics'
+
+    def get_queryset(self):
+        return PronosticPartit.objects.filter(jugador__usuari=self.request.user)

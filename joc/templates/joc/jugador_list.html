@@ -32,7 +32,7 @@
 <td>{{ jugador.id }}</td>
 <td><a href="{% url 'joc:pronostic' %}?usuari={$user.codi_usuari}">{{ jugador.usuari.username }}</a></td>
 <td>{{ jugador.usuari.first_name }} {{ jugador.usuari.last_name }}</a></td>
-</td>
+</tr>
 {% endfor %}
 </table>
 </div>

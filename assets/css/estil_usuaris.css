@@ -4,7 +4,7 @@
 	margin:auto;
 	margin-top: 40px;
 	clear:both;
-	background-color: #f7f9c7;
+	background-color: #dddddd;
 	font-family:Verdana;
 	font-weight:normal;
 	font-size:12px;
@@ -13,7 +13,7 @@
 {
 	background-color: black;
 	color: white;
-	text-align: left;
+	text-align: center;
 	font-family:Verdana;
 	font-weight:bold;
 	font-size:12px;
@@ -42,7 +42,7 @@
 	font-family:Verdana;
 	font-weight:bold;
 	font-size:12px;
-	background-color:#f4f192;
+	background-color:#cccccc;
 	color:#000;
 }
 .linia_bona a
@@ -50,7 +50,7 @@
 	font-family:Verdana;
 	font-weight:bold;
 	font-size:12px;
-	background-color:#f4f192;
+	background-color:#cccccc;
 	color:#000;
 	text-decoration:none;
 }

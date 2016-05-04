@@ -140,7 +140,6 @@ def pronostic(request):
             'grup': grup.nom,
             'seguent_grup': seguent_grup,
             'deshabilita_submit': deshabilita_submit,
-            'jugador': jugador,
             'text_grup': TEXT_GRUP[nom_grup],
         }
     )
