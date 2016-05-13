@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^', include('joc.urls', namespace='joc')),
     # url(r'^login/$', auth_views.login, {'template_name': 'login.html'}),
     # url(r'^logout/$', auth_views.login, {'template_name': 'logout.html'}),
-    url(r'^registration/', include('registration.urls', namespace='registration')),
+    url(r'^registration/', include('registration.urls')),
 ]
