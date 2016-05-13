@@ -66,7 +66,7 @@ msgstr "Compte activat"
 
 #: templates/registration/activation_complete.html:10
 msgid "Your account was activated"
-msgstr "El teu compte ja està activat! Fes click <a href='/joc'>aquí</a> per fer el teu pronòstic."
+msgstr "El teu compte ja està activat! Fes click <a href='/'>aquí</a> per fer el teu pronòstic."
 
 #: templates/registration/activation_form.html:4
 #: templates/registration/activation_form.html:6
