@@ -5,8 +5,8 @@ from django.shortcuts import redirect, render
 
 from joc.models import Grup, Jugador, Equip, Partit, PronosticPartit, PronosticEquipGrup
 from joc.utils import (
-    GOLS_CHOICES, EMPAT_CHOICES, FASE_GRUPS, COMPROVAR_TERCERS, ACABA_PRONOSTIC, TEXT_GRUP,
-    crea_partits, comprova_tercers, guarda_classificacio_grup)
+    GOLS_CHOICES, EMPAT_CHOICES, GUARDA_GRUPS, FASE_GRUPS, COMPROVAR_TERCERS, ACABA_PRONOSTIC,
+    TEXT_GRUP, crea_partits, comprova_tercers, guarda_classificacio_grup, CREAR_PARTITS)
 
 
 class PartitForm(forms.ModelForm):
@@ -58,9 +58,9 @@ def pronostic(request):
             pass
 
         # Si s'han de guardar classificacions d'equips
-        if nom_grup in FASE_GRUPS:
+        if nom_grup in GUARDA_GRUPS:
             guarda_classificacio_grup(request, jugador)
-        else:
+        if nom_grup in CREAR_PARTITS:
             crea_partits(request, jugador, nom_grup)
 
         if nom_grup in COMPROVAR_TERCERS:

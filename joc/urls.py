@@ -9,6 +9,7 @@ app_name = 'joc'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^pronostic$', views.pronostic, name='pronostic'),
+    url(r'^consulta_grups$', views.consulta_grups, name='consulta_grups'),
     url(r'^consulta$', login_required(ConsultaView.as_view()), name='consulta'),
     url(r'^usuaris$', login_required(UsuarisView.as_view()), name='usuaris'),
     url(r'^entrada_admin$', views.entrada_admin, name='entrada_admin'),

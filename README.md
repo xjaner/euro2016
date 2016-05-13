@@ -7,3 +7,5 @@ Quan canviï qualsevol traducció, s'ha de fer:
 python manage.py compilemessages --settings=euro2016.settings.local
 
 Quan faci deploy, he de configurar el nom i domini del Lloc a través de l'Admin > Llocs.
+
+python manage.py loaddata euro2016full -v 3 --settings=euro2016.settings.local
