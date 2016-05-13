@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
@@ -7,12 +9,12 @@ from joc.utils import FASE_GRUPS
 
 @login_required
 def consulta_grups(request):
-    grups = []
+    grups = OrderedDict()
     for grup in FASE_GRUPS:
-        grups.append(PronosticEquipGrup.objects.filter(
-            jugador__usuari=request.user,
-            equip__grup__nom=grup,
-        ).order_by('posicio'))
+        grups[grup] = list(
+            PronosticEquipGrup.objects.filter(jugador__usuari=request.user,
+                                              equip__grup__nom=grup,
+                                              ).order_by('posicio'))
 
     return render(
         request,

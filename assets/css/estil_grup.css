@@ -41,6 +41,14 @@
 	font-family: Verdana;
 	font-size: 10px;
 }
+.nomgrup{
+	font-weight: bold;
+	padding-left: 5px;
+	background-color: black;
+	color: white;
+	font-family: Verdana;
+	font-size: 10px;
+}
 .equip{
 	font-family: Verdana;
 	font-size: 12px;
