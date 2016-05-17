@@ -1,4 +1,5 @@
 from django.views import generic
+from django.db.models import Q
 
 from joc.models import PronosticPartit
 
@@ -8,4 +9,6 @@ class ConsultaView(generic.ListView):
     context_object_name = 'pronostics'
 
     def get_queryset(self):
-        return PronosticPartit.objects.filter(jugador__usuari=self.request.user)
+        return PronosticPartit.objects.filter(
+            jugador__usuari=self.request.user
+        ).exclude(Q(gols1=-1) | Q(gols2=-1))

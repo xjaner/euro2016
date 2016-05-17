@@ -13,11 +13,32 @@
 <!--
 function admin_actualitza()
 {
-	if(f1.accepto.checked==false){
-		alert("Has d'acceptar les normes per poder-te registrar!")
-	}else{
-		document.f1.submit()
-	}
+    var formulari = document.getElementById("f1");
+    var num_partits = formulari.elements["num-partits"].value;
+
+    acabat = 1;
+    for (var i=0;i<num_partits;i++)
+    {
+        var gols1 = "form-"+i+"-gols1";
+        var gols2 = "form-"+i+"-gols2";
+        var form = "form-"+i+"-empat";
+
+	    if (formulari.elements[gols1].value == formulari.elements[gols2].value)
+        {
+            for (var j=0, iLen=formulari.elements[form].length; j<iLen; j++)
+            {
+                formulari.elements[form][j].disabled = false;
+            } 
+        }
+        else
+        {
+            for (var j=0, iLen=formulari.elements[form].length; j<iLen; j++) {
+                formulari.elements[form][j].disabled = true;
+                formulari.elements[form][j].checked = false;
+            } 
+        }
+
+    }
 }
 -->
 </script>

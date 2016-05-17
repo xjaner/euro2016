@@ -293,7 +293,7 @@ def actualitza_partit_final(partit):
 
 def actualitza_posicions():
     for posicio, jugador in enumerate(Jugador.objects.filter(
-            usuari__is_active=True).filter(~Q(usuari_id=1)).order_by('punts')):
+            usuari__is_active=True).filter(~Q(usuari_id=1)).order_by('-punts')):
         jugador.posicio_anterior = jugador.posicio
         jugador.posicio = posicio + 1
         jugador.save()

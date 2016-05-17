@@ -13,6 +13,8 @@ class Jugador(models.Model):
     punts_grups = models.PositiveSmallIntegerField(default=0)
     punts_equips_encertats = models.PositiveSmallIntegerField(default=0)
 
+    def __unicode__(self):
+        return self.usuari.username
 
 class Grup(models.Model):
     nom = models.CharField(max_length=32)
@@ -47,7 +49,7 @@ class Partit(models.Model):
     grup = models.ForeignKey(Grup)
     gols1 = models.SmallIntegerField(default=-1)
     gols2 = models.SmallIntegerField(default=-1)
-    empat = models.PositiveSmallIntegerField(null=True)
+    empat = models.PositiveSmallIntegerField(null=True, blank=True, default=None)
 
     def signe(self):
         if self.gols1 > self.gols2:

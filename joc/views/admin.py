@@ -20,6 +20,18 @@ class PartitAdminForm(forms.ModelForm):
                               widget=forms.RadioSelect,
                               required=False)
 
+    def __init__(self, *args, **kwargs):
+        super(PartitAdminForm, self).__init__(*args, **kwargs)
+        self.fields['empat'].widget.attrs['disabled'] = True
+
+    def save(self, commit=True):
+        instance = super(PartitAdminForm, self).save(commit=False)
+        if commit:
+            if not instance.empat:
+                instance.empat = None
+            instance.save()
+        return instance
+
     class Meta:
         model = Partit
         fields = ('gols1', 'gols2', 'empat')
