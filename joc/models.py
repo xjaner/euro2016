@@ -73,6 +73,26 @@ class Partit(models.Model):
     def signe_encertat(self, pronostic):
         return self.signe() == pronostic.signe()
 
+    def guanyador(self):
+        if self.gols1 > self.gols2:
+            return self.equip1 or self.partit.equip1
+        elif self.gols2 > self.gols1:
+            return self.equip2 or self.partit.equip2
+        elif self.empat == 1:
+            return self.equip1 or self.partit.equip1
+        else:
+            return self.equip2 or self.partit.equip2
+
+    def perdedor(self):
+        if self.gols1 > self.gols2:
+            return self.equip2 or self.partit.equip2
+        elif self.gols2 > self.gols1:
+            return self.equip1 or self.partit.equip1
+        elif self.empat == 1:
+            return self.equip2 or self.partit.equip2
+        else:
+            return self.equip1 or self.partit.equip1
+
 
 class PronosticPartit(models.Model):
     jugador = models.ForeignKey(Jugador)
@@ -100,3 +120,13 @@ class PronosticPartit(models.Model):
             return self.equip1 or self.partit.equip1
         else:
             return self.equip2 or self.partit.equip2
+
+    def perdedor(self):
+        if self.gols1 > self.gols2:
+            return self.equip2 or self.partit.equip2
+        elif self.gols2 > self.gols1:
+            return self.equip1 or self.partit.equip1
+        elif self.empat == 1:
+            return self.equip2 or self.partit.equip2
+        else:
+            return self.equip1 or self.partit.equip1

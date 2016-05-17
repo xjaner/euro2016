@@ -194,10 +194,15 @@ def actualitza_partit_quarts(partit):
 
         pronostic = PronosticPartit.objects.get(partit_id=partit.id,
                                                 jugador_id=jugador.id)
+        # Punts per equips en posició correcta
+        if partit.equip1.id == pronostic.equip1.id:
+            punts_grups += 5
+        if partit.equip2.id == pronostic.equip2.id:
+            punts_grups += 5
+
+        # Punts pel resultat
         if (partit.equip1.id == pronostic.equip1.id and
                 partit.equip2.id == pronostic.equip2.id):
-            punts_grups += 10
-
             if partit.resultat_encertat(pronostic):
                 punts_resultats += 10
             elif partit.signe_encertat(pronostic):
@@ -235,10 +240,16 @@ def actualitza_partit_semis(partit):
 
         pronostic = PronosticPartit.objects.get(partit_id=partit.id,
                                                 jugador_id=jugador.id)
+
+        # Punts per equips en posició correcta
+        if partit.equip1.id == pronostic.equip1.id:
+            punts_grups += 10
+        if partit.equip2.id == pronostic.equip2.id:
+            punts_grups += 10
+
+        # Punts pel resultat
         if (partit.equip1.id == pronostic.equip1.id and
                 partit.equip2.id == pronostic.equip2.id):
-            punts_grups += 15
-
             if partit.resultat_encertat(pronostic):
                 punts_resultats += 14
             elif partit.signe_encertat(pronostic):
@@ -272,16 +283,26 @@ def actualitza_partit_final(partit):
 
         pronostic = PronosticPartit.objects.get(partit_id=partit.id,
                                                 jugador_id=jugador.id)
+
+        # Punts per equips en posició correcta
+        if partit.equip1.id == pronostic.equip1.id:
+            punts_grups += 10
+        if partit.equip2.id == pronostic.equip2.id:
+            punts_grups += 10
+
+        # Punts pel resultat
         if (partit.equip1.id == pronostic.equip1.id and
                 partit.equip2.id == pronostic.equip2.id):
-            punts_grups += 15
-
             if partit.resultat_encertat(pronostic):
-                punts_resultats += 14
+                punts_resultats += 20
             elif partit.signe_encertat(pronostic):
-                punts_resultats += 10
+                punts_resultats += 14
 
-        # TODO: Punts pel guanyador i finalista
+        if partit.guanyador().id == pronostic.guanyador().id:
+            punts_grups += 50
+
+        if partit.perdedor().id == pronostic.perdedor().id:
+            punts_grups += 25
 
         jugador.punts_anterior = jugador.punts
         jugador.punts += punts_resultats + punts_grups + punts_equips_encertats
