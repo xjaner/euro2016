@@ -7,7 +7,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'euro2016',
-        'USER': 'eurocopa',
+        'USER': 'euro2016',
         'PASSWORD': 'franca',
         'HOST': '127.0.0.1',
         'PORT': '3306',
