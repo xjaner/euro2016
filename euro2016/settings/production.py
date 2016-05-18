@@ -15,3 +15,4 @@ DATABASES = {
 }
 
 DEBUG = False
+ALLOWED_HOSTS = ['.disbarat.cat']
