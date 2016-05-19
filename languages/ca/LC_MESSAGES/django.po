@@ -66,7 +66,7 @@ msgstr "Compte activat"
 
 #: templates/registration/activation_complete.html:10
 msgid "Your account was activated"
-msgstr "El teu compte ja està activat! Fes click <a href='/'>aquí</a> per fer el teu pronòstic."
+msgstr "El teu compte ja està activat! Fes click <a href='/'>aquí</a> per entrar a la teva sessió."
 
 #: templates/registration/activation_form.html:4
 #: templates/registration/activation_form.html:6
@@ -161,3 +161,10 @@ msgid ""
 "be case-sensitive."
 msgstr "Nom d'usuari o contrasenya incorrectes."
 
+#: templates/registration/registration_form.html
+msgid "This value must contain only letters, numbers and underscores."
+msgstr "Aquest camp només pot contenir lletres, números i barres baixes."
+
+#: templates/registration/registration_form.html
+msgid "The two email fields didn't match."
+msgstr "Els emails entrats no coincideixen."

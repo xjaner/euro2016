@@ -8,9 +8,9 @@
 function valida()
 {
 	if(f1.accepto.checked==false){
-		alert("Has d'acceptar les normes per poder-te registrar!")
+		alert("Has d'acceptar les normes per poder-te registrar!");
 	}else{
-		document.f1.submit()
+		document.f1.submit();
 	}
 }
 -->
@@ -27,6 +27,11 @@ function valida()
 
 
 <table width="800px" align="center">
+{% if form.non_field_errors %}
+<tr>
+<td colspan=3 style="text-align: center; color: red">{{ form.non_field_errors.as_text }}</td>
+<tr>
+{% endif %}
 {% for field in form %}
 <tr>
 <td width="40%" style="text-align: right">{{ field.label_tag }}</td>
@@ -94,7 +99,7 @@ que han sigut vitals per definir i explorar totes les possibilitats del joc, i p
 <p></p>
 <div class="tick"><input type="checkbox" name="accepto">M'he llegit les normes i les accepto.</div>
 </div>
-<p><input type="submit" onclick="valida()" value="{% trans 'Register' %}"></p>
+<p><input type="button" onclick="valida()" value="{% trans 'Register' %}"></p>
 </form>
 
 {% endblock %}
