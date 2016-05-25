@@ -30,7 +30,7 @@
 <tr class="linia_usuaris">
 {% endif %}
 <td>{{ forloop.counter0|add:1 }} - <img width="12" height="12" src="{% if jugador.pagat %}{% static "img/tick.png" %}{% else %}{% static "img/cross.png" %}{% endif %}"></td>
-<td><a href="{% url 'joc:pronostic' %}?usuari={$user.codi_usuari}">{{ jugador.usuari.username }}</a></td>
+<td><a href="{% url 'joc:consulta' %}?usuari={{ jugador.id }}">{{ jugador.usuari.username }}</a></td>
 <td>{{ jugador.usuari.first_name }} {{ jugador.usuari.last_name }}</a></td>
 </tr>
 {% endfor %}
