@@ -267,7 +267,7 @@ function actualitza()
 
     if (acabat == 1 && error == 1)
     {
-        alert("ERROOOOR!");
+        alert("ATENCIÓ! El teu pronòstic actual pel grup fa que hi hagi alguns equips empatats a punts, diferència de gols i gols a favor. Si canvies algun resultat segur que desfàs l'empat.");
     }
 
     if (acabat == 1)
