@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^usuaris$', login_required(UsuarisView.as_view()), name='usuaris'),
     url(r'^entrada_admin$', views.entrada_admin, name='entrada_admin'),
     url(r'^pronostic_admin$', views.pronostic_admin, name='pronostic_admin'),
-    url(r'^puntuacions$', views.puntuacions, name='puntuacions'),
+    # url(r'^puntuacions$', views.puntuacions, name='puntuacions'),
     # Només abans
     url(r'^pronostic$', views.pronostic, name='pronostic'),
 ]
