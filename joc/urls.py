@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from . import views
 from views.usuaris import UsuarisView
 from views.consulta import ConsultaView
-from views.classificacio import ClassificacioView
 
 app_name = 'joc'
 urlpatterns = [
@@ -19,6 +18,4 @@ urlpatterns = [
     url(r'^puntuacions$', views.puntuacions, name='puntuacions'),
     # Només abans
     url(r'^pronostic$', views.pronostic, name='pronostic'),
-    # Només després
-    url(r'^classificacio$', login_required(ClassificacioView.as_view()), name='classificacio'),
 ]
