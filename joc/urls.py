@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^pronostic_admin$', views.pronostic_admin, name='pronostic_admin'),
     url(r'^puntuacions$', views.puntuacions, name='puntuacions'),
     # Només abans
-    url(r'^pronostic$', views.pronostic, name='pronostic'),
+    # url(r'^pronostic$', views.pronostic, name='pronostic'),
     # Només després
     url(r'^classificacio$', login_required(ClassificacioView.as_view()), name='classificacio'),
 ]

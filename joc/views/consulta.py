@@ -9,6 +9,10 @@ class ConsultaView(generic.ListView):
     context_object_name = 'pronostics'
 
     def get_queryset(self):
-        return PronosticPartit.objects.filter(
-            jugador__usuari=self.request.user
-        ).exclude(Q(gols1=-1) | Q(gols2=-1))
+        usuari_id = self.request.GET.get('usuari')
+        if usuari_id:
+            return PronosticPartit.objects.filter(
+                jugador_id=usuari_id)
+        else:
+            return PronosticPartit.objects.filter(
+                jugador__usuari=self.request.user)
