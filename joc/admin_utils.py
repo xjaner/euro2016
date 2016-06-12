@@ -12,22 +12,30 @@ from joc.utils import (FASE_GRUPS, VUITENS, QUARTS, SEMIS, FINAL, ULTIM_PARTIT_G
 def seguent_grup_entrat(admin_form):
     for form in admin_form.forms:
         if form.instance.id == ULTIM_PARTIT_GRUPS:
-            vuitens = Partit.objects.filter(grup__nom=VUITENS)
+            vuitens = PronosticPartit.objects.filter(
+                jugador_id=settings.ID_ADMIN,
+                partit__grup__nom=VUITENS)
             for partit in vuitens:
                 if not partit.equip1 or not partit.equip2:
                     return True
         if form.instance.id == ULTIM_PARTIT_VUITENS:
-            quarts = Partit.objects.filter(grup__nom=QUARTS)
+            quarts = PronosticPartit.objects.filter(
+                jugador_id=settings.ID_ADMIN,
+                partit__grup__nom=QUARTS)
             for partit in quarts:
                 if not partit.equip1 or not partit.equip2:
                     return True
         if form.instance.id == ULTIM_PARTIT_QUARTS:
-            semis = Partit.objects.filter(grup__nom=SEMIS)
+            semis = PronosticPartit.objects.filter(
+                jugador_id=settings.ID_ADMIN,
+                partit__grup__nom=SEMIS)
             for partit in semis:
                 if not partit.equip1 or not partit.equip2:
                     return True
         if form.instance.id == ULTIM_PARTIT_SEMIS:
-            final = Partit.objects.filter(grup__nom=FINAL)
+            final = PronosticPartit.objects.filter(
+                jugador_id=settings.ID_ADMIN,
+                partit__grup__nom=FINAL)
             for partit in final:
                 if not partit.equip1 or not partit.equip2:
                     return True
@@ -39,7 +47,7 @@ def obte_equips_fase_admin(fase):
         chain.from_iterable(
             (partit.equip1.id, partit.equip2.id)
             for partit in PronosticPartit.objects.filter(
-                jugador__usuari__id=1,
+                jugador__usuari__id=settings.ID_ADMIN,
                 partit__grup__nom=fase,
             )
         )
@@ -59,7 +67,8 @@ def obte_equips_fase_jugador(jugador, fase):
 
 
 def actualitza_partit_grups(partit):
-    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(~Q(usuari_id=1)):
+    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(
+            ~Q(usuari_id=settings.ID_ADMIN)):
         punts_resultats = 0
         punts_grups = 0
         punts_equips_encertats = 0
@@ -74,9 +83,10 @@ def actualitza_partit_grups(partit):
         if partit.id == ULTIM_PARTIT_GRUPS:
             # Punts per encertar la classificació dels grups
             for grup in FASE_GRUPS:
-                grups_admin = PronosticEquipGrup.objects.filter(jugador__usuari__id=1,
-                                                                equip__grup__nom=grup).order_by(
-                                                                    'posicio')
+                grups_admin = PronosticEquipGrup.objects.filter(
+                    jugador__usuari__id=settings.ID_ADMIN,
+                    equip__grup__nom=grup).order_by(
+                        'posicio')
                 grups_jugador = PronosticEquipGrup.objects.filter(jugador=jugador,
                                                                   equip__grup__nom=grup).order_by(
                                                                       'posicio')
@@ -140,7 +150,8 @@ def actualitza_partit_grups(partit):
 
 
 def actualitza_partit_vuitens(partit):
-    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(~Q(usuari_id=1)):
+    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(
+            ~Q(usuari_id=settings.ID_ADMIN)):
         punts_resultats = 0
         punts_grups = 0
         punts_equips_encertats = 0
@@ -187,7 +198,8 @@ def actualitza_partit_vuitens(partit):
 
 
 def actualitza_partit_quarts(partit):
-    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(~Q(usuari_id=1)):
+    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(
+            ~Q(usuari_id=settings.ID_ADMIN)):
         punts_resultats = 0
         punts_grups = 0
         punts_equips_encertats = 0
@@ -233,7 +245,8 @@ def actualitza_partit_quarts(partit):
 
 
 def actualitza_partit_semis(partit):
-    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(~Q(usuari_id=1)):
+    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(
+            ~Q(usuari_id=settings.ID_ADMIN)):
         punts_resultats = 0
         punts_grups = 0
         punts_equips_encertats = 0
@@ -276,7 +289,8 @@ def actualitza_partit_semis(partit):
 
 
 def actualitza_partit_final(partit):
-    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(~Q(usuari_id=1)):
+    for jugador in Jugador.objects.filter(usuari__is_active=True).filter(
+            ~Q(usuari_id=settings.ID_ADMIN)):
         punts_resultats = 0
         punts_grups = 0
         punts_equips_encertats = 0
@@ -314,7 +328,7 @@ def actualitza_partit_final(partit):
 
 def actualitza_posicions():
     for posicio, jugador in enumerate(Jugador.objects.filter(
-            usuari__is_active=True).filter(~Q(usuari_id=1)).order_by('-punts')):
+            usuari__is_active=True).filter(~Q(usuari_id=settings.ID_ADMIN)).order_by('-punts')):
         jugador.posicio_anterior = jugador.posicio
         jugador.posicio = posicio + 1
         jugador.save()

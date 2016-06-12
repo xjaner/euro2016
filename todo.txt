@@ -1,3 +1,0 @@
-llista d'usuaris - numeros
-consultar pronostic i grups de qualsevol usuari
-classificació

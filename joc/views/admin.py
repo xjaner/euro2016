@@ -82,8 +82,3 @@ def entrada_admin(request):
             'cal_entrar_grups': cal_entrar_grups,
         }
     )
-
-
-@staff_member_required
-def pronostic_admin(request):
-    return pronostic(request)

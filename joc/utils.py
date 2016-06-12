@@ -57,7 +57,7 @@ POSICIO_TERCERS = {
 }
 
 
-def get_or_create_and_reset_pronostic_partit(id_partit, jugador, id_equip1, id_equip2):
+def get_or_create_and_reset_pronostic_partit(id_partit, jugador, id_equip1, id_equip2, admin=False):
     try:
         pronostic_partit = PronosticPartit.objects.get(jugador=jugador, partit_id=id_partit)
     except PronosticPartit.DoesNotExist:
@@ -71,9 +71,14 @@ def get_or_create_and_reset_pronostic_partit(id_partit, jugador, id_equip1, id_e
             pronostic_partit.gols2 = -1
             pronostic_partit.empat = None
             pronostic_partit.save()
+    if admin:
+        partit = Partit.objects.get(pk=id_partit)
+        partit.equip1 = id_equip1
+        partit.equip2 = id_equip2
+        partit.save()
 
 
-def crea_final(request, jugador):
+def crea_final(request, jugador, admin=False):
     get_or_create_and_reset_pronostic_partit(
         51,
         jugador,
@@ -85,10 +90,11 @@ def crea_final(request, jugador):
             jugador=jugador,
             partit_id=50
         ).guanyador().id,
+        admin,
     )
 
 
-def crea_semis(request, jugador):
+def crea_semis(request, jugador, admin=False):
     get_or_create_and_reset_pronostic_partit(
         49,
         jugador,
@@ -100,6 +106,7 @@ def crea_semis(request, jugador):
             jugador=jugador,
             partit_id=46
         ).guanyador().id,
+        admin,
     )
 
     get_or_create_and_reset_pronostic_partit(
@@ -113,10 +120,11 @@ def crea_semis(request, jugador):
             jugador=jugador,
             partit_id=48
         ).guanyador().id,
+        admin,
     )
 
 
-def crea_quarts(request, jugador):
+def crea_quarts(request, jugador, admin=False):
     get_or_create_and_reset_pronostic_partit(
         45,
         jugador,
@@ -128,6 +136,7 @@ def crea_quarts(request, jugador):
             jugador=jugador,
             partit_id=39
         ).guanyador().id,
+        admin,
     )
 
     get_or_create_and_reset_pronostic_partit(
@@ -141,6 +150,7 @@ def crea_quarts(request, jugador):
             jugador=jugador,
             partit_id=42
         ).guanyador().id,
+        admin,
     )
 
     get_or_create_and_reset_pronostic_partit(
@@ -154,6 +164,7 @@ def crea_quarts(request, jugador):
             jugador=jugador,
             partit_id=43
         ).guanyador().id,
+        admin,
     )
 
     get_or_create_and_reset_pronostic_partit(
@@ -167,10 +178,11 @@ def crea_quarts(request, jugador):
             jugador=jugador,
             partit_id=44
         ).guanyador().id,
+        admin,
     )
 
 
-def crea_vuitens(request, jugador):
+def crea_vuitens(request, jugador, admin=False):
     tercers = PronosticEquipGrup.objects.filter(jugador=jugador,
                                                 posicio=3)
     tercers_ordenats = sorted(tercers, key=FUNCIO_ORDRE, reverse=True)[:4]
@@ -190,6 +202,7 @@ def crea_vuitens(request, jugador):
             equip__grup__nom='C',
             posicio=2,
         ).equip.id,
+        admin,
     )
 
     get_or_create_and_reset_pronostic_partit(
@@ -205,6 +218,7 @@ def crea_vuitens(request, jugador):
             equip__grup__nom=emparellaments_tercers['WB'],
             posicio=3,
         ).equip.id,
+        admin,
     )
 
     get_or_create_and_reset_pronostic_partit(
@@ -220,6 +234,7 @@ def crea_vuitens(request, jugador):
             equip__grup__nom=emparellaments_tercers['WD'],
             posicio=3,
         ).equip.id,
+        admin,
     )
 
     get_or_create_and_reset_pronostic_partit(
@@ -235,6 +250,7 @@ def crea_vuitens(request, jugador):
             equip__grup__nom=emparellaments_tercers['WA'],
             posicio=3,
         ).equip.id,
+        admin,
     )
 
     get_or_create_and_reset_pronostic_partit(
@@ -250,6 +266,7 @@ def crea_vuitens(request, jugador):
             equip__grup__nom=emparellaments_tercers['WC'],
             posicio=3,
         ).equip.id,
+        admin,
     )
 
     get_or_create_and_reset_pronostic_partit(
@@ -265,6 +282,7 @@ def crea_vuitens(request, jugador):
             equip__grup__nom='E',
             posicio=2,
         ).equip.id,
+        admin,
     )
 
     get_or_create_and_reset_pronostic_partit(
@@ -280,6 +298,7 @@ def crea_vuitens(request, jugador):
             equip__grup__nom='D',
             posicio=2,
         ).equip.id,
+        admin,
     )
 
     get_or_create_and_reset_pronostic_partit(
@@ -295,18 +314,19 @@ def crea_vuitens(request, jugador):
             equip__grup__nom='F',
             posicio=2,
         ).equip.id,
+        admin,
     )
 
 
-def crea_partits(request, jugador, nom_grup):
+def crea_partits(request, jugador, nom_grup, admin=False):
     if nom_grup == 'G':
-        crea_vuitens(request, jugador)
+        crea_vuitens(request, jugador, admin)
     elif nom_grup == 'H':
-        crea_quarts(request, jugador)
+        crea_quarts(request, jugador, admin)
     elif nom_grup == 'I':
-        crea_semis(request, jugador)
+        crea_semis(request, jugador, admin)
     elif nom_grup == 'J':
-        crea_final(request, jugador)
+        crea_final(request, jugador, admin)
 
 
 def comprova_tercers(request, jugador):

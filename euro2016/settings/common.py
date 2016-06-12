@@ -129,3 +129,4 @@ LOGIN_URL = '/registration/login'
 
 EQUIPS_PER_GRUP = 4
 NUM_GRUPS = 6
+ID_ADMIN = 1
