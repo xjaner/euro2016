@@ -12,7 +12,7 @@ class ConsultaView(generic.ListView):
         usuari_id = self.request.GET.get('usuari')
         if usuari_id:
             return PronosticPartit.objects.filter(
-                jugador_id=usuari_id)
+                jugador_id=usuari_id).order_by('partit__diaihora')
         else:
             return PronosticPartit.objects.filter(
-                jugador__usuari=self.request.user)
+                jugador__usuari=self.request.user).order_by('partit__diaihora')
