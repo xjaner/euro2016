@@ -55,9 +55,9 @@
 <td>{{ jugador.punts_grups }}</td>
 <td>{{ jugador.punts_equips_encertats }}</td>
 <td><b>{{ jugador.punts}}</b></td>
-{% if jugador.dif_punts < 0 %}
+{% if jugador.dif_punts > 0 %}
 <td class="amunt">
-{% elif jugador.dif_punts > 0 %}
+{% elif jugador.dif_punts < 0 %}
 <td class="avall">
 {% else %}
 <td class="igual">
