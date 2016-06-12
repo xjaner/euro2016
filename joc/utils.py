@@ -3,7 +3,7 @@ from itertools import groupby
 
 from django.conf import settings
 
-from joc.models import PronosticPartit, PronosticEquipGrup, Equip
+from joc.models import Partit, PronosticPartit, PronosticEquipGrup, Equip
 
 GOLS_CHOICES = (('-1', '-'), (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
                 (8, 8))
@@ -73,8 +73,8 @@ def get_or_create_and_reset_pronostic_partit(id_partit, jugador, id_equip1, id_e
             pronostic_partit.save()
     if admin:
         partit = Partit.objects.get(pk=id_partit)
-        partit.equip1 = id_equip1
-        partit.equip2 = id_equip2
+        partit.equip1_id = id_equip1
+        partit.equip2_id = id_equip2
         partit.save()
 
 

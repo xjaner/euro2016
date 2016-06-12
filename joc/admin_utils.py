@@ -14,28 +14,36 @@ def seguent_grup_entrat(admin_form):
         if form.instance.id == ULTIM_PARTIT_GRUPS:
             vuitens = PronosticPartit.objects.filter(
                 jugador_id=settings.ID_ADMIN,
-                partit__grup__nom=VUITENS)
+                partit__grup__nom__in=VUITENS)
+            if not vuitens:
+                return True
             for partit in vuitens:
                 if not partit.equip1 or not partit.equip2:
                     return True
         if form.instance.id == ULTIM_PARTIT_VUITENS:
             quarts = PronosticPartit.objects.filter(
                 jugador_id=settings.ID_ADMIN,
-                partit__grup__nom=QUARTS)
+                partit__grup__nom__in=QUARTS)
+            if not quarts:
+                return True
             for partit in quarts:
                 if not partit.equip1 or not partit.equip2:
                     return True
         if form.instance.id == ULTIM_PARTIT_QUARTS:
             semis = PronosticPartit.objects.filter(
                 jugador_id=settings.ID_ADMIN,
-                partit__grup__nom=SEMIS)
+                partit__grup__nom__in=SEMIS)
+            if not semis:
+                return True
             for partit in semis:
                 if not partit.equip1 or not partit.equip2:
                     return True
         if form.instance.id == ULTIM_PARTIT_SEMIS:
             final = PronosticPartit.objects.filter(
                 jugador_id=settings.ID_ADMIN,
-                partit__grup__nom=FINAL)
+                partit__grup__nom__in=FINAL)
+            if not final:
+                return True
             for partit in final:
                 if not partit.equip1 or not partit.equip2:
                     return True
