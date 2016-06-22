@@ -56,7 +56,7 @@ def obte_equips_fase_admin(fase):
             (partit.equip1.id, partit.equip2.id)
             for partit in PronosticPartit.objects.filter(
                 jugador__usuari__id=settings.ID_ADMIN,
-                partit__grup__nom=fase,
+                partit__grup__nom__in=fase,
             )
         )
     ))
@@ -68,7 +68,7 @@ def obte_equips_fase_jugador(jugador, fase):
             (partit.equip1.id, partit.equip2.id)
             for partit in PronosticPartit.objects.filter(
                 jugador=jugador,
-                partit__grup__nom=fase,
+                partit__grup__nom__in=fase,
             )
         )
     ))
@@ -100,7 +100,7 @@ def actualitza_partit_grups(partit):
                                                                       'posicio')
                 equips_posicio_correcta = 0
                 for idx in xrange(settings.EQUIPS_PER_GRUP):
-                    if grups_admin[idx].id == grups_jugador[idx].id:
+                    if grups_admin[idx].equip_id == grups_jugador[idx].equip_id:
                         equips_posicio_correcta += 1
 
                 if equips_posicio_correcta == 1:
