@@ -1,0 +1,2 @@
+- quan actualitzo més d'un partit alhora, la diferència de posicions està bé (considera els 2 partits) però la diferència de punts només considera l'últim partit actualitzat!
+- pronostic grups: surten desordenats
